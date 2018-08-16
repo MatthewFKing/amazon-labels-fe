@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
+import RemovalOrder from './RemovalOrder.js';
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    showRO: false,
+  };
+
+  toggleTest = () => {
+    this.setState({ showRO: !this.state.showRO });
+  }
 
   onUpload = e => {
     e.preventDefault();
@@ -40,15 +49,20 @@ class App extends Component {
   }
 
   render() {
-
+    const labels = <div className="container">
+    <h3> Amazon Labels </h3>
+    
+    <form onSubmit={this.onUpload}>
+      <div className="form-group">
+        <input className="form-control" ref={(ref) => { this.uploadInput = ref; }} type="file" />
+      </div>
+      <button className="btn btn-success">Upload</button>
+    </form>
+  </div>;
     return (
-      <div className="container">
-        <form onSubmit={this.onUpload}>
-          <div className="form-group">
-            <input className="form-control" ref={(ref) => { this.uploadInput = ref; }} type="file" />
-          </div>
-          <button className="btn btn-success">Upload</button>
-        </form>
+      <div>
+        <button className='btn' onClick={this.toggleTest}>test</button>
+        {this.state.showRO ? <RemovalOrder/> : labels}
       </div>
     );
   }
