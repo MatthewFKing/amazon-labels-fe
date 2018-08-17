@@ -58,7 +58,7 @@ class RemovalOrder extends Component {
         const file = new Blob(
           [response.data.output], 
           {type: 'text/csv'});
-        fileDownload(file, 'report.csv');
+        fileDownload(file, 'RemovalReport.csv');
         this.setState({ 
           roIDs: [],
           poList: [],
