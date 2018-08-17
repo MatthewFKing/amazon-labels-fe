@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import fileDownload from 'js-file-download';
 import './App.css';
 
 class RemovalOrder extends Component {
@@ -8,6 +9,7 @@ class RemovalOrder extends Component {
     roIDs: [],
     poList: [],
     reportData: [],
+    missingParts: [],
   }
 
   onUpload = e => {
@@ -52,24 +54,42 @@ class RemovalOrder extends Component {
 
     axios.post(url,data)
       .then(response => {
-        console.log(response)
+        console.log(response);
+        const file = new Blob(
+          [response.data.output], 
+          {type: 'text/csv'});
+        fileDownload(file, 'report.csv');
+        this.setState({ 
+          roIDs: [],
+          poList: [],
+          reportData: [],
+          missingParts: response.data.missingParts
+        });
       })
       .catch(error=> {
         console.log(error)
       });
   }
+
   render() {
     const poList = 
     <div>
     {this.state.roIDs.map((ID, index) =>
-
       <li className={this.state.poList.indexOf(ID) > -1 ? 'list-group-item active' : 'list-group-item'} key={index} onClick={(e) => this.addPO(ID, e)}>
         {ID}
       </li>
-      
     )}
     <button className='btn' onClick={this.generate}>Submit</button>
     </div>;
+
+    const missingPartsList = 
+    <div>
+    <h3>Parts needed in Fishbowl</h3>
+    {this.state.missingParts.map((part, index) =>
+      <li className='list-group-item' key={index}>
+        {part}
+      </li>
+    )}</div>;
     return(
       <div className="container">
       <h3>Removal Order Generator</h3>
@@ -80,6 +100,7 @@ class RemovalOrder extends Component {
           <button className="btn btn-success">Upload</button>
         </form>
         {this.state.roIDs.length > 1 ? poList : null}
+        {this.state.missingParts.length > 1 ? missingPartsList : null}
       </div>
     )
   }

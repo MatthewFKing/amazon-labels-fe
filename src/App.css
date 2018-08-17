@@ -31,3 +31,5 @@
 .container {
   width: 35vw;
 } 
+
+li {cursor: pointer}
