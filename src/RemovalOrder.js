@@ -55,15 +55,23 @@ class RemovalOrder extends Component {
     axios.post(url,data)
       .then(response => {
         console.log(response);
-        const file = new Blob(
-          [response.data.output], 
+        const roFile = new Blob(
+          [response.data.toReport], 
           {type: 'text/csv'});
-        fileDownload(file, 'RemovalReport.csv');
+        const invFile = new Blob(
+          [response.data.invReport], 
+          {type: 'text/csv'});
+        const partFile = new Blob(
+          [response.data.partReport], 
+          {type: 'text/csv'});
+        fileDownload(roFile, 'RemovalReport.csv');
+        fileDownload(invFile, 'AddInventory.csv');
+        fileDownload(partFile, 'AddParts.csv');
+        
         this.setState({ 
           roIDs: [],
           poList: [],
           reportData: [],
-          missingParts: response.data.missingParts
         });
       })
       .catch(error=> {
