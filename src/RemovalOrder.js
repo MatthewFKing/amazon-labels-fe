@@ -10,31 +10,75 @@ class RemovalOrder extends Component {
     poList: [],
     reportData: [],
     missingParts: [],
+    error: "",
+    ufNum: 0,
+    editUF: false,
+  }
+
+  url = "http://10.0.0.234:3030";
+
+  componentDidMount() {
+    const url = `${this.url}/ufnum`;
+
+    axios.get(url)
+      .then(response => {
+        this.setState({ ufNum: response.data[0].current });
+        console.log(response.data[0].current);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  UfEdit = (e) => {
+    if (!this.state.editUF) {
+      this.setState({ editUF: !this.state.editUF });
+    } else {
+      const url = `${this.url}/ufnum`;
+      let data = { current: parseInt(this.state.ufNum, 10) };
+      axios.post(url, data)
+        .then(response => {
+          this.setState({ editUF: !this.state.editUF });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      
+    }
+  }
+
+  updateUfNum = e => {
+    this.setState({ ufNum: e.target.value })
   }
 
   onUpload = e => {
     e.preventDefault();
-    const url = 'http://192.168.1.3:3090/ro';
-    let reader = new FileReader();
-    reader.onload = () => {
-      let data = reader.result.split("\n").map(line => {
-        return line.split(/,?\s+/);
-      });
-      this.setState({ reportData: data });
-      axios.post(url, data)
-        .then(response => {
-          this.setState({ roIDs: response.data });
-        })
-        .catch(error => {
-          console.log(error)
+
+    if (!this.uploadInput.files[0]) {
+      this.setState({ error: "No File Selected" })
+    } else {
+      const url = `${this.url}/ro`;
+      let reader = new FileReader();
+      reader.onload = () => {
+        let data = reader.result.split("\n").map(line => {
+          return line.split(/,?\s+/);
         });
+        this.setState({ reportData: data });
+        axios.post(url, data)
+          .then(response => {
+            this.setState({ roIDs: response.data });
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      }
+      reader.readAsText(this.uploadInput.files[0]);
     }
-    reader.readAsText(this.uploadInput.files[0]);
   }
 
   onUploadParts = e => {
     e.preventDefault();
-    const url = 'http://192.168.1.3:3090/roparts';
+    const url = `${this.url}/roparts`;
     let reader = new FileReader();
     reader.onload = () => {
       console.log(reader.result)
@@ -62,68 +106,75 @@ class RemovalOrder extends Component {
   }
 
   generate = () => {
-    const url = 'http://192.168.1.3:3090/roGen';
-    let data = {
-      poList: this.state.poList,
-      report: this.state.reportData
-    };
+    const url = `${this.url}/roGen`;
+    if (!this.state.poList) {
+      this.setState({ error: "No Removal Orders Selected" })
+    } else {
 
-    axios.post(url,data)
-      .then(response => {
-        const roFile = new Blob(
-          [response.data.toReport], 
-          {type: 'text/csv'});
-        const invFile = new Blob(
-          [response.data.invReport], 
-          {type: 'text/csv'});
-        const partFile = new Blob(
-          [response.data.partReport], 
-          {type: 'text/csv'});
-        fileDownload(roFile, 'RemovalReport.csv');
-        fileDownload(invFile, 'AddInventory.csv');
-        fileDownload(partFile, 'AddParts.csv');
-        
-        this.setState({ 
-          roIDs: [],
-          poList: [],
-          reportData: [],
+      let data = {
+        poList: this.state.poList,
+        report: this.state.reportData,
+      };
+
+      axios.post(url, data)
+        .then(response => {
+          const roFile = new Blob(
+            [response.data.toReport],
+            { type: 'text/csv' });
+          const invFile = new Blob(
+            [response.data.invReport],
+            { type: 'text/csv' });
+          const partFile = new Blob(
+            [response.data.partReport],
+            { type: 'text/csv' });
+          fileDownload(roFile, 'RemovalReport.csv');
+          fileDownload(invFile, 'AddInventory.csv');
+          fileDownload(partFile, 'AddParts.csv');
+
+          this.setState({
+            roIDs: [],
+            poList: [],
+            reportData: [],
+          });
+        })
+        .catch(error => {
+          console.log(error)
         });
-      })
-      .catch(error=> {
-        console.log(error)
-      });
+    }
   }
 
   render() {
-    const poList = 
-    <div>
-      {this.state.roIDs.map((ID, index) =>
-        <li className={this.state.poList.indexOf(ID) > -1 ? 'list-group-item active' : 'list-group-item'} key={index} onClick={(e) => this.addPO(ID, e)}>
-          {ID}
-        </li>
-      )}
-      <button className='btn' onClick={this.generate}>Submit</button>
-    </div>;
+    const poList =
+      <div>
+        {this.state.roIDs.map((ID, index) =>
+          <li className={this.state.poList.indexOf(ID) > -1 ? 'list-group-item active' : 'list-group-item'} key={index} onClick={(e) => this.addPO(ID, e)}>
+            {ID}
+          </li>
+        )}
+        <button className='btn' onClick={this.generate}>Submit</button>
+      </div>;
 
-    const missingPartsList = 
-    <div>
-      <h3>Parts needed in Fishbowl</h3>
-      {this.state.missingParts.map((part, index) =>
-        <li className='list-group-item' key={index}>
-          {part}
-        </li>
-      )}
-    </div>;
+    const missingPartsList =
+      <div>
+        <h3>Parts needed in Fishbowl</h3>
+        {this.state.missingParts.map((part, index) =>
+          <li className='list-group-item' key={index}>
+            {part}
+          </li>
+        )}
+      </div>;
 
-    return(
+    return (
       <div className="container">
-      <h3 className="card-header">Removal Order Generator</h3>
+        <h3 className="card-header">Removal Order Generator</h3>
         <form className="form-inline" onSubmit={this.onUpload}>
           <div className="form-group">
             <input className="form-control" ref={(ref) => { this.uploadInput = ref; }} type="file" />
           </div>
           <button className="btn btn-primary">Upload</button>
+          <small className="text-danger">{this.state.error}</small>
         </form>
+        
         <h3 className="card-header">Update Parts List</h3>
         <form className="form-inline" onSubmit={this.onUploadParts}>
           <div className="form-group">
@@ -131,6 +182,29 @@ class RemovalOrder extends Component {
           </div>
           <button className="btn btn-primary">Upload</button>
         </form>
+
+        <form className="form-inline">
+          <div className='form-row align-items-center'>
+            <div className="col-auto">
+              {!this.state.editUF ?
+                <span className="card-text">Current UF Number: UF00{this.state.ufNum}</span> :
+                <input type="text" className="form-control mb-2"
+                  placeholder="1234" value={this.state.ufNum}
+                  onChange={this.updateUfNum}>
+                </input>
+              }
+            </div>
+            <div className="col-auto">
+              <button type="button" className="btn btn-primary mb-2" onClick={this.UfEdit}>
+                {!this.state.editUF ?
+                  "Edit" :
+                  "Submit"
+                }
+              </button>
+            </div>
+          </div>
+        </form>
+
         {this.state.roIDs.length > 1 ? poList : null}
         {this.state.missingParts.length > 1 ? missingPartsList : null}
       </div>

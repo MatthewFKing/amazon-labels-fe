@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 class Home extends Component {
 
   render() {
-    
+
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="collapse navbar-collapse" id="navbarNav">

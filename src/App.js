@@ -4,6 +4,7 @@ import './App.css';
 import NeEbReport from './NeEbReport.js';
 import AmzLabels from './AmzLabels.js';
 import Home from './Home.js';
+import Test from './Test.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
         <Route path="/ro" component={RemovalOrder}/>
         <Route path="/amzlabels" component={AmzLabels}/>
         <Route path="/neebreport" component={NeEbReport}/>
+        <Route path="/test" component={Test}/>
         </div>
       </Router>
     );
