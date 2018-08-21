@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
-import excelParser from 'excel-parser';
 import './App.css';
 
 class NeEbReport extends Component {
