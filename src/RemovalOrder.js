@@ -43,7 +43,7 @@ class RemovalOrder extends Component {
         .catch(error => {
           console.log(error);
         });
-      
+
     }
   }
 
@@ -78,13 +78,12 @@ class RemovalOrder extends Component {
 
   onUploadParts = e => {
     e.preventDefault();
-    const url = `${this.url}/roparts`;
+    const url = `${this.url}/partlist`;
     let reader = new FileReader();
     reader.onload = () => {
-      console.log(reader.result)
-      axios.post(url, "hello")
+      axios.post(url, { data: reader.result })
         .then(response => {
-          console.log('Parts updated!')
+          console.log(response.data)
         })
         .catch(error => {
           console.log(error)
@@ -166,46 +165,51 @@ class RemovalOrder extends Component {
 
     return (
       <div className="container">
-        <h3 className="card-header">Removal Order Generator</h3>
-        <form className="form-inline" onSubmit={this.onUpload}>
-          <div className="form-group">
-            <input className="form-control" ref={(ref) => { this.uploadInput = ref; }} type="file" />
-          </div>
-          <button className="btn btn-primary">Upload</button>
-          <small className="text-danger">{this.state.error}</small>
-        </form>
-        
-        <h3 className="card-header">Update Parts List</h3>
-        <form className="form-inline" onSubmit={this.onUploadParts}>
-          <div className="form-group">
-            <input className="form-control" ref={(ref) => { this.partsList = ref; }} type="file" />
-          </div>
-          <button className="btn btn-primary">Upload</button>
-        </form>
-
-        <form className="form-inline">
-          <div className='form-row align-items-center'>
-            <div className="col-auto">
-              {!this.state.editUF ?
-                <span className="card-text">Current UF Number: UF00{this.state.ufNum}</span> :
-                <input type="text" className="form-control mb-2"
-                  placeholder="1234" value={this.state.ufNum}
-                  onChange={this.updateUfNum}>
-                </input>
-              }
+        <div className='card'>
+          <h3 className="card-header">Removal Order Generator</h3>
+          <form className="form-inline" onSubmit={this.onUpload}>
+            <div className="form-group">
+              <input className="form-control" ref={(ref) => { this.uploadInput = ref; }} type="file" />
             </div>
-            <div className="col-auto">
-              <button type="button" className="btn btn-primary mb-2" onClick={this.UfEdit}>
+            <button className="btn btn-primary">Upload</button>
+            <small className="text-danger">{this.state.error}</small>
+          </form>
+        </div>
+
+        <div className='card'>
+          <h3 className="card-header">Update Parts List</h3>
+          <form className="form-inline" onSubmit={this.onUploadParts}>
+            <div className="form-group">
+              <input className="form-control" ref={(ref) => { this.partsList = ref; }} type="file" />
+            </div>
+            <button className="btn btn-primary">Upload</button>
+          </form>
+        </div>
+        <div className='card'>
+          <form className="form-inline">
+            <div className='form-row align-items-center card-body'>
+              <div className="col-auto">
                 {!this.state.editUF ?
-                  "Edit" :
-                  "Submit"
+                  <p className="card-text">Current UF Number: UF00{this.state.ufNum}</p> :
+                  <input type="text" className="form-control mb-2"
+                    placeholder="1234" value={this.state.ufNum}
+                    onChange={this.updateUfNum}>
+                  </input>
                 }
-              </button>
+              </div>
+              <div className="col-auto">
+                <button type="button" className="btn btn-primary mb-2" onClick={this.UfEdit}>
+                  {!this.state.editUF ?
+                    "Edit" :
+                    "Submit"
+                  }
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
 
-        {this.state.roIDs.length > 1 ? poList : null}
+        {this.state.roIDs.length > 0 ? poList : null}
         {this.state.missingParts.length > 1 ? missingPartsList : null}
       </div>
     )
