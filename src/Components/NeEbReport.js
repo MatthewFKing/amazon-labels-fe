@@ -16,22 +16,26 @@ class NeEbReport extends Component {
   onUpload = e => {
     e.preventDefault();
     let data = null;
-    if (this.uploadEB.file[0] && !this.uploadNE.file[0]) {
+    let url = `${this.url}/neebreport`;
+
+    if (this.uploadEB.files[0] && !this.uploadNE.files[0]) {
+      url = `${this.url}/ebreport`;
       data = { report: this.state.ebReport, clearedOrders: this.state.clearedEBOrders };
-    } else if (!this.uploadEB.file[0] && this.uploadNE.file[0]) {
+    } else if (!this.uploadEB.files[0] && this.uploadNE.files[0]) {
       data = new FormData();
       data.append('file', this.uploadNE.files[0]);
-    } else if (this.uploadEB.file[0] && this.uploadNE.file[0]) {
+    } else if (this.uploadEB.files[0] && this.uploadNE.files[0]) {
       data = new FormData();
       data.append('file', this.uploadNE.files[0]);
       data.append('ebReport', this.state.ebReport);
       data.append('clearedOrders', this.state.clearedEBOrders);
     }
-    const url = `${this.url}/neebreport`;
+
+
 
     axios.post(url, data)
       .then(response => {
-        this.setState({ ebOrders: response.data })
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error)
@@ -48,11 +52,11 @@ class NeEbReport extends Component {
           });
         });
 
-        this.setState({ ebReport: data });
-
         let orders = data.filter(line => {
           return line[10] === "United States";
         });
+
+        this.setState({ ebReport: orders });
 
         this.setState({ ebOrders: orders.map(line => line[0]) });
       }
