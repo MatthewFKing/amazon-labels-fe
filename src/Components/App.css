@@ -37,3 +37,31 @@ li {cursor: pointer}
 .card{
   margin: 10px;
 }
+
+.clear-orders {
+  grid-area: sidebar;
+  justify-self: left;
+}
+
+.neeb-form{
+  grid-area:main;
+  justify-self: center;
+}
+
+.eb-clear {
+  grid-area: submain;
+  justify-self: center;
+  width: 25vw;
+}
+
+.neeb {
+  margin-left: 0;
+  margin-right:0;
+  display: grid;
+  grid-template-columns: 25vw 25vw 25vw 25vw;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "left main main sidebar"
+    "left submain submain sidebar";
+}
+

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import fileDownload from 'js-file-download';
 import './App.css';
 
 class NeEbReport extends Component {
@@ -35,7 +36,10 @@ class NeEbReport extends Component {
 
     axios.post(url, data)
       .then(response => {
-        console.log(response.data);
+        const fbReport = new Blob(
+          [response.data.fbReport],
+          { type: 'text/csv' });
+        fileDownload(fbReport, `NE EB Report.csv`);
       })
       .catch(error => {
         console.log(error)
@@ -77,20 +81,10 @@ class NeEbReport extends Component {
     }
   }
 
-
-  generate = () => {
-    //needs error handling and what to do if only NE or EB is uploaded
-    //If EB send cleared orders and report as object
-    //If NE send only FormData
-    //If both send everything as form data
-
-
-  }
-
   render() {
 
     const ebOrders =
-      <div className='card'>
+      <div className='card eb-clear'>
         <h5 className='card-header'>Select Cleared Orders</h5>
         {this.state.ebOrders.map((ID, index) =>
           <li className={this.state.clearedEBOrders.indexOf(ID) > -1 ? 'list-group-item active' : 'list-group-item'}
@@ -98,12 +92,17 @@ class NeEbReport extends Component {
             onClick={(e) => this.addClearedOrder(ID, e)}>
             {ID}
           </li>)}
-        <button className='btn' onClick={this.generate}>Submit</button>
+
       </div>;
 
     return (
-      <div className="container">
-        <h3>Newegg Ebay Sales Order Report</h3>
+      <div className="container neeb">
+        <div className="clear-orders">
+          <button className="btn">Clear Completed NE Orders</button>
+        </div>
+        <div className="neeb-form">
+        <h3 className="card-header">Newegg Ebay Sales Order Report</h3>
+        
         <form onSubmit={this.onUpload}>
           <div className="form-group">
             <h4> Ebay Report </h4>
@@ -111,8 +110,9 @@ class NeEbReport extends Component {
             <h4> Newegg Report </h4>
             <input className="form-control" ref={(ref) => { this.uploadNE = ref; }} type="file" />
           </div>
-          <button className="btn btn-success">Upload</button>
+          <button className="btn btn-primary">Upload</button>
         </form>
+        </div>
         {this.state.ebOrders.length > 0 ? ebOrders : null}
       </div>
     )
