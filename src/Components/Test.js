@@ -8,7 +8,7 @@ class Test extends Component {
 
   };
 
-  url = "http://10.0.0.234:3030";
+  url = "http://localhost:3030";
 
   onUpload = e => {
     e.preventDefault();
@@ -25,11 +25,11 @@ class Test extends Component {
   };
 
   getTest = () => {
-    const url = `${this.url}/test`;
+    const url = `${this.url}/ca`;
 
     axios.get(url)
       .then(response => {
-        console.log(response.data[0].current);
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error);

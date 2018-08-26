@@ -54,6 +54,12 @@ li {cursor: pointer}
   width: 25vw;
 }
 
+.instructions {
+  grid-area: left;
+  color: black;
+  margin: 10px;
+}
+
 .neeb {
   margin-left: 0;
   margin-right:0;
@@ -64,4 +70,5 @@ li {cursor: pointer}
     "left main main sidebar"
     "left submain submain sidebar";
 }
+
 

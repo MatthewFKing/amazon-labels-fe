@@ -16,6 +16,7 @@ class App extends Component {
       <Router>
         <div>
         <Route path="/" component={Home}/>
+        <Route exact path="/" component={HomeReport}/>
         <Route path="/Home" component={HomeReport}/>
         <Route path="/ro" component={RemovalOrder}/>
         <Route path="/amzlabels" component={AmzLabels}/>

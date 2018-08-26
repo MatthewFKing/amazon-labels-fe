@@ -1,6 +1,24 @@
+To Do:
 
 Removal Order Generator: 
-Remove CF stuff from RO part import
-update -UF numbers (2918)
-date on removal orders not importing
+date on removal orders not importing (try removing toLocalDateString)
 update parts list
+prompt for next closest SKU when part isnt found.
+
+Neeb:
+
+PDF:
+move finished file to tmp
+create unique file names for tmp files
+
+Home Page:
+load when on the home Page
+
+throughout:
+Redux Forms
+
+Done:
+
+Removal Order Generator:
+update -UF numbers (2918)
+Remove CF stuff from RO part import
