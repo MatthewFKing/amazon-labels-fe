@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { NavLink } from 'react-router-dom'
 
-class Home extends Component {
+class Nav extends Component {
 
   render() {
 
@@ -22,6 +22,9 @@ class Home extends Component {
             <li className="nav-item">
               <NavLink className="nav-link" to="/neebreport">Newegg Ebay Report</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/ca">Newegg Canada Report</NavLink>
+            </li>
           </ul>
         </div>
       </nav>
@@ -29,4 +32,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Nav;

@@ -71,4 +71,17 @@ li {cursor: pointer}
     "left submain submain sidebar";
 }
 
+.e-waste-list {
+  display:flex;
+  vertical-align: middle;
+  justify-content: space-around;
+}
 
+.e-waste-list p {
+  vertical-align: middle;
+  margin: 5px;
+}
+
+.e-waste-list .input-group {
+  width: 50%;
+}

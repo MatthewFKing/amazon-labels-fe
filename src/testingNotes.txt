@@ -1,15 +1,17 @@
 To Do:
 
 Removal Order Generator: 
-date on removal orders not importing (try removing toLocalDateString)
-update parts list
 prompt for next closest SKU when part isnt found.
 
+
 Neeb:
+tax info for Ebay is not working
+
 
 PDF:
 move finished file to tmp
 create unique file names for tmp files
+
 
 Home Page:
 load when on the home Page
@@ -22,3 +24,9 @@ Done:
 Removal Order Generator:
 update -UF numbers (2918)
 Remove CF stuff from RO part import
+date on removal orders not importing (try removing toLocalDateString) - using moment.js
+remove -S
+update parts list
+
+Neeb:
+dates not working either. - working using moment.js
