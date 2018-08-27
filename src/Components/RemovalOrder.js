@@ -150,7 +150,7 @@ class RemovalOrder extends Component {
 
   render() {
     const poList = (
-      <div>
+      <div className='ro-order-list'>
         {this.state.roIDs.map((ID, index) => (
           <li
             className={

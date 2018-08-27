@@ -2,6 +2,7 @@ To Do:
 
 Removal Order Generator: 
 prompt for next closest SKU when part isnt found.
+remove first element from returned po list and add a static header for that list.
 
 
 Neeb:
