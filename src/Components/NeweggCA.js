@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import fileDownload from "js-file-download";
 import axios from "axios";
 import "./App.css";
 
@@ -37,12 +38,14 @@ class NeweggCA extends Component {
 
     axios.post(url, data)
     .then(response => {
-      console.log(response);
+      const fbReport = new Blob([response.data.fbReport], {
+        type: "text/csv"
+      });
+      fileDownload(fbReport, `NE EB Report.csv`);
     })
     .catch(error => {
       console.log(error);
     });
-
 
   }
 
@@ -72,7 +75,7 @@ class NeweggCA extends Component {
             </div>
           </li>
         ))}
-        <button className="btn btn-primary" onClick={this.generate}></button>
+        <button className="btn" onClick={this.generate}>Submit</button>
       </div>
     );
 
@@ -91,22 +94,16 @@ class NeweggCA extends Component {
           </button>
           <div className="collapse" id="collapseExample">
             <div className="card card-body">
-              Instructions for Use:
-              <br />
-              1. Download the Sales Report from Ebay and Newegg.
-              <br />
-              2. Drag the downloaded Ebay report to the Ebay Upload section.
-              <br />
-              3. Select the cleared Ebay Orders from the pop-up
-              <br />
-              4. Drag the downloaded Newegg Report to the Newegg upload section{" "}
-              <br />
-              5. Click "Submit" and the Fishbowl Sales Orders Report will be
-              downloaded <br />
-              6. Open Fishbowl and click File -> Import -> Sales Orders and
-              select the downloaded file
-              <br />
-              7. Verify that the correct orders have been uploaded.
+              <h4>Instructions for Use:</h4>
+              <p>1. Download the Sales Report from Newegg Canada (make sure that the advanced search is set to <mark>"Order Status: Unshipped"</mark>).
+              <a className="" rel="noopener noreferrer" href="https://sellerportal.newegg.com/can/manage-order/orderlist" target="_blank"> Link</a></p>
+              <p>2. Drag the downloaded Newegg Report to the file upload section.</p>
+              <p>3. Click "Upload" and enter the GST Fees for each order.</p>
+              <p>4. Click "Submit" at the bottom of this list and the Fishbowl Sales Orders Report will be
+              downloaded.</p>
+              <p>5. Open Fishbowl and click File -> Import -> Sales Orders and
+              select the downloaded file.</p>
+              <p>6. Verify that the correct orders have been uploaded.</p>
             </div>
           </div>
         </div>

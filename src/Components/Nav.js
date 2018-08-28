@@ -25,6 +25,9 @@ class Nav extends Component {
             <li className="nav-item">
               <NavLink className="nav-link" to="/ca">Newegg Canada Report</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/amzca">Amazon Canada Report</NavLink>
+            </li>
           </ul>
         </div>
       </nav>

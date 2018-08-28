@@ -5,6 +5,7 @@ import NeEbReport from './NeEbReport.js';
 import AmzLabels from './AmzLabels.js';
 import HomeReport from './HomeReport.js';
 import NeweggCA from './NeweggCA';
+import AmazonCA from './AmazonCA';
 import Nav from './Nav.js';
 import Test from './Test.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -24,6 +25,7 @@ class App extends Component {
         <Route path="/neebreport" component={NeEbReport}/>
         <Route path="/test" component={Test}/>
         <Route path="/ca" component={NeweggCA}/>
+        <Route path="/amzca" component={AmazonCA}/>
         </div>
       </Router>
     );

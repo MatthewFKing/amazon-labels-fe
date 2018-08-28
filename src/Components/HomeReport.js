@@ -2,9 +2,42 @@ import React, { Component } from "react";
 import "./App.css";
 
 class HomeReport extends Component {
+  state = {
+    ordersPicked: [],
+    posReceived: [],
+    fbaShipped: [],
+    ordersShipped: [],
+    update: false,
+  }
+
+  update = () => {
+    this.setState({ update: !this.state.update });
+  }
+
+  onUploadPicking = (e) => {
+    e.preventDefault();
+    
+  }
+
   render() {
+    const updateForm = (
+      <div className="form-group">
+        <h4>Picking Report</h4>
+        <input
+          className="form-control"
+          ref={ref => {
+            this.pickingReport = ref;
+          }}
+          type="file"
+          onChange={this.onUploadPicking}
+        />
+      </div>
+    );
+
     return (
       <div className="container">
+        <button className='btn' onClick={this.update}>Update</button>
+        {this.state.update ? updateForm : null}
         <div className="card">
           <h5 className="card-header">Inventory</h5>
           <div className="card-body">

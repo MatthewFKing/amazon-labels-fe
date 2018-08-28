@@ -88,8 +88,18 @@ li {cursor: pointer}
 
 .ro-order-list li {
   padding: .5rem 1rem;
+  text-align: center;
 }
 
+.ro-order-list {
+  grid-area:sidebar;
+  justify-self: left;
+  width: 75%;
+}
 
-
+.ro-forms {
+  grid-area:main;
+  justify-self: center;
+  width: 25vw;
+}
 

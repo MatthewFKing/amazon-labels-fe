@@ -120,22 +120,15 @@ class NeEbReport extends Component {
           </button>
           <div className="collapse" id="collapseExample">
             <div className="card card-body">
-              Instructions for Use:
-              <br />
-              1. Download the Sales Report from Ebay and Newegg.
-              <br />
-              2. Drag the downloaded Ebay report to the Ebay Upload section.
-              <br />
-              3. Select the cleared Ebay Orders from the pop-up
-              <br />
-              4. Drag the downloaded Newegg Report to the Newegg upload section{" "}
-              <br />
-              5. Click "Submit" and the Fishbowl Sales Orders Report will be
-              downloaded <br />
-              6. Open Fishbowl and click File -> Import -> Sales Orders and
-              select the downloaded file
-              <br />
-              7. Verify that the correct orders have been uploaded.
+            <h4>Instructions for Use:</h4>
+              <p>1. Download the Sales Report from Newegg (make sure that the advanced search is set to <mark>"Order Status: Unshipped"</mark> and <mark>"Fulfill By: Seller"</mark>).</p>
+              <p>2. Drag the downloaded reports to their corresponding upload sections.</p>
+              <p>3. If uploaded an Ebay Report select the cleared Ebay Order Numbers.</p>
+              <p>4. Click "Submit" at the bottom of this list and the Fishbowl Sales Orders Report will be
+              downloaded.</p>
+              <p>5. Open Fishbowl and click File -> Import -> Sales Orders and
+              select the downloaded file.</p>
+              <p>6. Verify that the correct orders have been uploaded.</p>
             </div>
           </div>
         </div>

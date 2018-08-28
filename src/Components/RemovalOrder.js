@@ -84,7 +84,7 @@ class RemovalOrder extends Component {
     const url = `${this.url}/ro/partlist`;
     let data = new FormData();
     data.append("file", this.partsList.files[0]);
-    
+
     axios
       .post(url, data)
       .then(response => {
@@ -151,6 +151,7 @@ class RemovalOrder extends Component {
   render() {
     const poList = (
       <div className='ro-order-list'>
+        <h5>Select Order IDs</h5>
         {this.state.roIDs.map((ID, index) => (
           <li
             className={
@@ -182,8 +183,34 @@ class RemovalOrder extends Component {
     );
 
     return (
-      <div className="container ro">
-        <div className="card">
+      <div className="container ro neeb">
+        <div className="instructions">
+          <button
+            className="btn btn-light"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Instructions
+          </button>
+          <div className="collapse" id="collapseExample">
+            <div className="card card-body">
+              <h4>Instructions for Use:</h4>
+              <p>1. Download the Removal Order Detail Report from Amazon.
+                <a className="" rel="noopener noreferrer" href="https://sellercentral.amazon.com/gp/ssof/reports/search.html#orderAscending=&recordType=REMOVAL_ORDER_DETAIL&noResultType=&merchantSku=&fnSku=&FnSkuXORMSku=&reimbursementId=&orderId=&genericOrderId=&asin=&lpn=&shipmentId=&problemType=ALL_DEFECT_TYPES&hazmatStatus=&inventoryEventTransactionType=&fulfillmentCenterId=&inventoryAdjustmentReasonGroup=&eventDateOption=1&fromDate=mm%2Fdd%2Fyyyy&toDate=mm%2Fdd%2Fyyyy&startDate=&endDate=&fromMonth=1&fromYear=2018&toMonth=1&toYear=2018&startMonth=&startYear=&endMonth=&endYear=" target="_blank"> Link</a>
+              </p>
+              <p>2. Drag the downloaded file to the Removal Order Generator section.</p>
+              <p>3. Select the Order IDs that you need from the list.</p>
+              <p>4. Click "Submit" at the bottom of this list and the Fishbowl TO, Parts and Inventory Reports will be
+              downloaded.</p>
+              <p>5. Open Fishbowl and upload the reports in this order: Parts - Inventory - TO</p>
+              <p>6. Verify that the correct information has been uploaded to Fishbowl.</p>
+            </div>
+          </div>
+        </div>
+        <div className="card ro-forms">
           <h3 className="card-header">Removal Order Generator</h3>
           <form className="form-inline" onSubmit={this.onUpload}>
             <div className="form-group">
@@ -198,9 +225,8 @@ class RemovalOrder extends Component {
             <button className="btn btn-primary">Upload</button>
             <small className="text-danger">{this.state.error}</small>
           </form>
-        </div>
 
-        <div className="card">
+
           <h3 className="card-header">Update Parts List</h3>
           <form className="form-inline" onSubmit={this.onUploadParts}>
             <div className="form-group">
@@ -214,8 +240,6 @@ class RemovalOrder extends Component {
             </div>
             <button className="btn btn-primary">Upload</button>
           </form>
-        </div>
-        <div className="card">
           <form className="form-inline">
             <div className="form-row align-items-center card-body">
               <div className="col-auto">
@@ -225,14 +249,14 @@ class RemovalOrder extends Component {
                     {this.state.ufNum}
                   </p>
                 ) : (
-                  <input
-                    type="text"
-                    className="form-control mb-2"
-                    placeholder="1234"
-                    value={this.state.ufNum}
-                    onChange={this.updateUfNum}
-                  />
-                )}
+                    <input
+                      type="text"
+                      className="form-control mb-2"
+                      placeholder="1234"
+                      value={this.state.ufNum}
+                      onChange={this.updateUfNum}
+                    />
+                  )}
               </div>
               <div className="col-auto">
                 <button
@@ -246,7 +270,6 @@ class RemovalOrder extends Component {
             </div>
           </form>
         </div>
-
         {this.state.roIDs.length > 0 ? poList : null}
         {this.state.missingParts.length > 1 ? missingPartsList : null}
       </div>

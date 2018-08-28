@@ -2,7 +2,7 @@ To Do:
 
 Removal Order Generator: 
 prompt for next closest SKU when part isnt found.
-remove first element from returned po list and add a static header for that list.
+
 
 
 Neeb:
@@ -15,10 +15,10 @@ create unique file names for tmp files
 
 
 Home Page:
-load when on the home Page
 
 throughout:
 Redux Forms
+Switch for the routers
 
 Done:
 
@@ -28,6 +28,7 @@ Remove CF stuff from RO part import
 date on removal orders not importing (try removing toLocalDateString) - using moment.js
 remove -S
 update parts list
+remove first element from returned po list and add a static header for that list.
 
 Neeb:
 dates not working either. - working using moment.js
