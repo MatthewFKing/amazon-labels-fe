@@ -8,10 +8,31 @@ class NeEbReport extends Component {
     error: "",
     ebOrders: [],
     clearedEBOrders: [],
-    ebReport: []
+    ebReport: [],
+    lastOrders: [],
+    toggleDeleteIDs: false,
+    ordersToDelete: [],
   };
 
   url = "http://localhost:3030";
+
+  componentDidMount() {
+    let url = `${this.url}/nenum`;
+    axios.get(url)
+      .then(response => {
+        let lastOrders = response.data.map(order => {
+          return order.ID;
+        });
+        this.setState({ lastOrders });
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
+  toggleDeleteIDs = () => {
+    this.setState({ toggleDeleteIDs: !this.state.toggleDeleteIDs });
+  }
 
   onUpload = e => {
     e.preventDefault();
@@ -70,7 +91,6 @@ class NeEbReport extends Component {
   };
 
   addClearedOrder = (id, e) => {
-    console.log(e.target);
     if (this.state.clearedEBOrders.indexOf(id) === -1) {
       let clearedEBOrders = [...this.state.clearedEBOrders, id];
       this.setState({ clearedEBOrders });
@@ -81,6 +101,29 @@ class NeEbReport extends Component {
       this.setState({ clearedEBOrders });
     }
   };
+
+  addToDelete = (id, e) => {
+    if (this.state.ordersToDelete.indexOf(id) === -1) {
+      let ordersToDelete = [...this.state.ordersToDelete, id];
+      this.setState({ ordersToDelete });
+    } else {
+      let ordersToDelete = [...this.state.ordersToDelete];
+      var index = ordersToDelete.indexOf(id);
+      ordersToDelete.splice(index, 1);
+      this.setState({ ordersToDelete });
+    }
+  }
+
+  deleteOrders = () => {
+    let data = this.state.ordersToDelete;
+    axios.post(`${this.url}/neid`, data)
+      .then(response => {
+        window.location.reload()
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
 
   render() {
     const ebOrders = (
@@ -102,11 +145,28 @@ class NeEbReport extends Component {
       </div>
     );
 
+    const completedOrders = (
+      <div className="last-orders">
+        <h5 className="card-header">Select the Orders to Remove</h5>
+        {this.state.lastOrders.map((ID, index) => (
+          <li
+          className={
+            this.state.ordersToDelete.indexOf(ID) > -1
+              ? "list-group-item active"
+              : "list-group-item"
+          }
+            onClick={e => this.addToDelete(ID, e)}
+            key={index}>
+            {ID}
+          </li>
+        ))}
+        <button className='btn btn-danger' onClick={this.deleteOrders}>Delete</button>
+      </div>
+    );
+
     return (
       <div className="container neeb">
-        <div className="clear-orders">
-          <button className="btn">Clear Completed NE Orders</button>
-        </div>
+
         <div className="instructions">
           <button
             className="btn btn-light"
@@ -120,7 +180,7 @@ class NeEbReport extends Component {
           </button>
           <div className="collapse" id="collapseExample">
             <div className="card card-body">
-            <h4>Instructions for Use:</h4>
+              <h4>Instructions for Use:</h4>
               <p>1. Download the Sales Report from Newegg (make sure that the advanced search is set to <mark>"Order Status: Unshipped"</mark> and <mark>"Fulfill By: Seller"</mark>).</p>
               <p>2. Drag the downloaded reports to their corresponding upload sections.</p>
               <p>3. If uploaded an Ebay Report select the cleared Ebay Order Numbers.</p>
@@ -137,7 +197,7 @@ class NeEbReport extends Component {
 
           <form onSubmit={this.onUpload}>
             <div className="form-group">
-              <h4> Ebay Report </h4>
+              <h4>Ebay Report</h4>
               <input
                 className="form-control"
                 ref={ref => {
@@ -146,7 +206,9 @@ class NeEbReport extends Component {
                 type="file"
                 onChange={this.EBFileSelect}
               />
-              <h4> Newegg Report </h4>
+              <div className='ne-header'>
+                <h4>Newegg Report</h4><p>Last Completed: {this.state.lastOrders[0]}</p>
+              </div>
               <input
                 className="form-control"
                 ref={ref => {
@@ -155,10 +217,15 @@ class NeEbReport extends Component {
                 type="file"
               />
             </div>
+
             <button className="btn btn-primary">Upload</button>
+            
+
           </form>
+          <button className='btn btn-warning' onClick={this.toggleDeleteIDs}>Clear Completed Newegg Orders</button>
         </div>
         {this.state.ebOrders.length > 0 ? ebOrders : null}
+        {this.state.toggleDeleteIDs ? completedOrders : null}
       </div>
     );
   }
@@ -166,6 +233,6 @@ class NeEbReport extends Component {
 
 export default NeEbReport;
 
-//if ebay only upload report and cleared orders
-//if newegg only upload formdata only
-//if both first request cleared orders and then send everything as form data
+    //if ebay only upload report and cleared orders
+    //if newegg only upload formdata only
+    //if both first request cleared orders and then send everything as form data

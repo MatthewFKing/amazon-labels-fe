@@ -36,6 +36,7 @@ li {cursor: pointer}
 
 .card{
   margin: 10px;
+  padding: 10px;
 }
 
 .clear-orders {
@@ -46,8 +47,16 @@ li {cursor: pointer}
 .neeb-form{
   grid-area:main;
   justify-self: center;
+  margin: 10px;
+  padding: 10px;
+}
+.neeb-form form {
+  padding: 10px;
 }
 
+.neeb-form button {
+  margin: 5px;
+}
 .eb-clear {
   grid-area: submain;
   justify-self: center;
@@ -64,7 +73,7 @@ li {cursor: pointer}
   margin-left: 0;
   margin-right:0;
   display: grid;
-  grid-template-columns: 25vw 25vw 25vw 25vw;
+  grid-template-columns: 20vw 30vw 15vw 35vw;
   grid-template-rows: auto;
   grid-template-areas: 
     "left main main sidebar"
@@ -103,3 +112,17 @@ li {cursor: pointer}
   width: 25vw;
 }
 
+.last-orders {
+  grid-area:sidebar;
+  justify-self: left;
+  height: 5rem;
+}
+
+.ne-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ne-header p {
+  margin-top: 3px;
+}

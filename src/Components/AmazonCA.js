@@ -11,6 +11,7 @@ class AmazonCA extends Component {
     caAllOrders: [],
     caOrderIDs: [],
     clearedOrders: [],
+    error: '',
   };
 
   url = "http://localhost:3030/ca/amz";
@@ -49,28 +50,34 @@ class AmazonCA extends Component {
   }
 
   generate = () => {
-    let url = `${this.url}/gen`;
-    let data = {
-      caUnshippedOrders: this.state.caUnshippedOrders,
-      caAllOrders: this.state.caAllOrders,
-      clearedOrders: this.state.clearedOrders
-    };
+    if (this.state.caAllOrders.length > 0 && this.state.clearedOrders.length > 0) {
+      let url = `${this.url}/gen`;
+      let data = {
+        caUnshippedOrders: this.state.caUnshippedOrders,
+        caAllOrders: this.state.caAllOrders,
+        clearedOrders: this.state.clearedOrders
+      };
 
-    axios.post(url, data)
-      .then(response => {
-        const fbReport = new Blob([response.data.fbReport], {
-          type: "text/csv"
+      axios.post(url, data)
+        .then(response => {
+          const fbReport = new Blob([response.data.fbReport], {
+            type: "text/csv"
+          });
+          fileDownload(fbReport, `AmzCAReport.csv`);
+        })
+        .catch(error => {
+          console.log(error);
         });
-        fileDownload(fbReport, `AmzCAReport.csv`);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    } else {
+      let error = this.state.clearedOrders.length === 0
+        ? "No orders selected!"
+        : "You must upload the All Orders Report!";
+      this.setState({ error });
+    }
 
   }
 
   addClearedOrder = (id, e) => {
-    console.log(e.target);
     if (this.state.clearedOrders.indexOf(id) === -1) {
       let clearedOrders = [...this.state.clearedOrders, id];
       this.setState({ clearedOrders });
@@ -130,30 +137,50 @@ class AmazonCA extends Component {
             </div>
           </div>
         </div>
-        <div className="neeb-form">
+        <div className="neeb-form card">
           <h3 className="card-header">Amazon Canada Order Report</h3>
 
           <form onSubmit={this.onUpload}>
             <div className="form-group">
-              <h4>Amazon Unshipped Report</h4>
-              <input
-                className="form-control"
-                ref={ref => {
-                  this.AmazonUnshipped = ref;
-                }}
-                type="file"
-                onChange={this.onUploadUnshipped}
-              />
-              <h4>Amazon All Orders Report</h4>
-              <input
-                className="form-control"
-                ref={ref => {
-                  this.AmazonAllOrders = ref;
-                }}
-                type="file"
-                onChange={this.onUploadAll}
-              />
+              <h5>Amazon Unshipped Report</h5>
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroupFileAddon01">Unshipped</span>
+                </div>
+                <div className="custom-file">
+                  <input
+                    className="custom-file-input"
+                    id="inputGroupFile01"
+                    ref={ref => {
+                      this.AmazonUnshipped = ref;
+                    }}
+                    type="file"
+                    onChange={this.onUploadUnshipped}
+                  />
+                  <label className="custom-file-label" for="inputGroupFile01">{this.AmazonUnshipped ? this.AmazonUnshipped.files[0].name : "Choose file"}</label>
+                </div>
+              </div>
+              <h5>Amazon All Orders Report</h5>
+              <div className="input-group mb-3">
+              
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroupFileAddon02">All Orders</span>
+                </div>
+                <div className="custom-file">
+                  <input
+                    className="custom-file-input"
+                    id="inputGroupFile02"
+                    ref={ref => {
+                      this.AmazonAllOrders = ref;
+                    }}
+                    type="file"
+                    onChange={this.onUploadAll}
+                  />
+                  <label className="custom-file-label" for="inputGroupFile02">Choose file</label>
+                </div>
+              </div>
             </div>
+            {this.state.error ? <div class="alert alert-danger" role="alert">{this.state.error}</div> : null}
             <button className="btn btn-primary">Upload</button>
           </form>
         </div>

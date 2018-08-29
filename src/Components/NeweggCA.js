@@ -55,6 +55,15 @@ class NeweggCA extends Component {
     this.setState({ orderIDs })
   }
 
+  removeOrder = (idIndex, e) => {
+    const orderIDs = this.state.orderIDs;
+    const neReport = this.state.neReport;
+    const reportIndex = neReport.findIndex(line => line['Order Number'] === orderIDs[idIndex].id);
+    neReport.splice(reportIndex, 1);
+    orderIDs.splice(idIndex, 1);
+    this.setState({ orderIDs, neReport });
+  }
+
   render() {
 
     const orderIDList = (
@@ -72,6 +81,7 @@ class NeweggCA extends Component {
                 </div>
                 <input type="text" className="form-control" aria-label="Amount" value={ID.amount} onChange={(e) => this.setEWaste(index, e)}></input>
               </div>
+              <button className='btn btn-danger' onClick={(e) => this.removeOrder(index, e)}>X</button>
             </div>
           </li>
         ))}
