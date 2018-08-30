@@ -14,7 +14,7 @@ class RemovalOrder extends Component {
     editUF: false
   };
 
-  url = "http://localhost:3030";
+  url = "http://10.0.0.234:3030";
 
   componentDidMount() {
     this.updateUF();

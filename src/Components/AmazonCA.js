@@ -14,7 +14,7 @@ class AmazonCA extends Component {
     error: '',
   };
 
-  url = "http://localhost:3030/ca/amz";
+  url = "http://10.0.0.234:3030/ca/amz";
 
   onUploadUnshipped = e => {
     e.preventDefault();
@@ -157,7 +157,7 @@ class AmazonCA extends Component {
                     type="file"
                     onChange={this.onUploadUnshipped}
                   />
-                  <label className="custom-file-label" for="inputGroupFile01">{this.AmazonUnshipped ? this.AmazonUnshipped.files[0].name : "Choose file"}</label>
+                  <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
                 </div>
               </div>
               <h5>Amazon All Orders Report</h5>
@@ -176,12 +176,11 @@ class AmazonCA extends Component {
                     type="file"
                     onChange={this.onUploadAll}
                   />
-                  <label className="custom-file-label" for="inputGroupFile02">Choose file</label>
+                  <label className="custom-file-label" htmlFor="inputGroupFile02">Choose file</label>
                 </div>
               </div>
             </div>
             {this.state.error ? <div class="alert alert-danger" role="alert">{this.state.error}</div> : null}
-            <button className="btn btn-primary">Upload</button>
           </form>
         </div>
         {this.state.caOrderIDs.length > 0 ? orderIDList : null}

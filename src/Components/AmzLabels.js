@@ -24,8 +24,7 @@ class AmzLabels extends Component {
       const url = `${this.url}/pdf`;
       axios.post(url, data)
         .then(response => {
-          console.log(response)
-          this.getFile();
+          this.getFile(response.data);
         })
         .catch(error => {
           console.log(error);
@@ -33,12 +32,14 @@ class AmzLabels extends Component {
     }
   };
 
-  getFile = () => {
-    const url = `${this.url}/pdf`;
-
-    axios.get(url, {
-      method: 'GET',
-      responseType: 'blob'
+  getFile = (time) => {
+    const url = `${this.url}/pdf/final`;
+    let data = { time };
+    axios({
+      url: url,
+      method: 'POST',
+      data: data,
+      responseType: 'blob' //Force to receive data in a Blob Format
     })
       .then(response => {
         const file = new Blob(
