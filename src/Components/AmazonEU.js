@@ -3,7 +3,7 @@ import fileDownload from "js-file-download";
 import axios from "axios";
 import "./App.css";
 
-class AmazonCA extends Component {
+class AmazonEU extends Component {
   state = {
     orderIDs: [],
     neReport: [],
@@ -14,7 +14,7 @@ class AmazonCA extends Component {
     error: '',
   };
 
-  url = "http://10.0.0.234:3060/ca/amz";
+  url = "http://10.0.0.234:3060/uk";
 
   onUploadUnshipped = e => {
     e.preventDefault();
@@ -160,7 +160,7 @@ class AmazonCA extends Component {
                   <label className="custom-file-label" htmlFor="inputGroupFile01">Choose file</label>
                 </div>
               </div>
-              <h5>Amazon All Orders Report</h5>
+              <h5>Amazon New Orders Report</h5>
               <div className="input-group mb-3">
               
                 <div className="input-group-prepend">
@@ -171,10 +171,10 @@ class AmazonCA extends Component {
                     className="custom-file-input"
                     id="inputGroupFile02"
                     ref={ref => {
-                      this.AmazonAllOrders = ref;
+                      this.AmazonNewOrders = ref;
                     }}
                     type="file"
-                    onChange={this.onUploadAll}
+                    onChange={this.onUploadNew}
                   />
                   <label className="custom-file-label" htmlFor="inputGroupFile02">Choose file</label>
                 </div>
@@ -189,4 +189,4 @@ class AmazonCA extends Component {
   }
 }
 
-export default AmazonCA;
+export default AmazonEU;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
+import FNSKULabels from './FNSKULabels';
 import './App.css';
 
 class AmzLabels extends Component {
@@ -12,7 +13,7 @@ class AmzLabels extends Component {
     error: ""
   };
 
-  url = "http://10.0.0.234:3030";
+  url = "http://10.0.0.234:3060";
 
   onUpload = e => {
     e.preventDefault();
@@ -62,6 +63,8 @@ class AmzLabels extends Component {
         <button className="btn btn-primary">Upload</button>
         <small className="text-danger">{this.state.error}</small>
       </form>
+      <br/>
+      <div><FNSKULabels/></div>
       
     </div>;
     return (
