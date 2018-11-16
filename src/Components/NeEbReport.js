@@ -166,32 +166,7 @@ class NeEbReport extends Component {
 
     return (
       <div className="container neeb">
-
-        <div className="instructions">
-          <button
-            className="btn btn-light"
-            type="button"
-            data-toggle="collapse"
-            data-target="#collapseExample"
-            aria-expanded="false"
-            aria-controls="collapseExample"
-          >
-            Instructions
-          </button>
-          <div className="collapse" id="collapseExample">
-            <div className="card card-body">
-              <h4>Instructions for Use:</h4>
-              <p>1. Download the Sales Report from Newegg (make sure that the advanced search is set to <mark>"Order Status: Unshipped"</mark> and <mark>"Fulfill By: Seller"</mark>).</p>
-              <p>2. Drag the downloaded reports to their corresponding upload sections.</p>
-              <p>3. If uploaded an Ebay Report select the cleared Ebay Order Numbers.</p>
-              <p>4. Click "Submit" at the bottom of this list and the Fishbowl Sales Orders Report will be
-              downloaded.</p>
-              <p>5. Open Fishbowl and click File -> Import -> Sales Orders and
-              select the downloaded file.</p>
-              <p>6. Verify that the correct orders have been uploaded.</p>
-            </div>
-          </div>
-        </div>
+        
         <div className="neeb-form">
           <h3 className="card-header">Newegg Ebay Sales Order Report</h3>
 
@@ -223,6 +198,31 @@ class NeEbReport extends Component {
 
           </form>
           <button className='btn btn-warning' onClick={this.toggleDeleteIDs}>Clear Completed Newegg Orders</button>
+        </div>
+        <div className="instructions">
+          <button
+            className="btn btn-light"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Instructions
+          </button>
+          <div className="collapse" id="collapseExample">
+            <div className="card card-body">
+              <h4>Instructions for Use:</h4>
+              <p>1. Download the Sales Report from Newegg (make sure that the advanced search is set to <mark>"Order Status: Unshipped"</mark> and <mark>"Fulfill By: Seller"</mark>).</p>
+              <p>2. Drag the downloaded reports to their corresponding upload sections.</p>
+              <p>3. If uploaded an Ebay Report select the cleared Ebay Order Numbers.</p>
+              <p>4. Click "Submit" at the bottom of this list and the Fishbowl Sales Orders Report will be
+              downloaded.</p>
+              <p>5. Open Fishbowl and click File -> Import -> Sales Orders and
+              select the downloaded file.</p>
+              <p>6. Verify that the correct orders have been uploaded.</p>
+            </div>
+          </div>
         </div>
         {this.state.ebOrders.length > 0 ? ebOrders : null}
         {this.state.toggleDeleteIDs ? completedOrders : null}

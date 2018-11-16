@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  background-color:#F7F7F7;
+}
+
+body {
+  background-color:#F7F7F7;
+  font-family: 'Poppins', sans-serif;
 }
 
 .App-logo {
@@ -29,7 +35,7 @@
 
 
 .container {
-  width: 35vw;
+  width: 100%;
 } 
 
 li {cursor: pointer}
@@ -40,15 +46,16 @@ li {cursor: pointer}
 }
 
 .clear-orders {
-  grid-area: sidebar;
+  grid-area: right;
   justify-self: left;
 }
 
 .neeb-form{
   grid-area:main;
-  justify-self: center;
+  justify-self: left;
   margin: 10px;
   padding: 10px;
+  
 }
 .neeb-form form {
   padding: 10px;
@@ -63,21 +70,38 @@ li {cursor: pointer}
   width: 25vw;
 }
 
+.card-header {
+  background-color: #F7F7F7;
+  color: #2C3B4A;
+}
+
 .instructions {
-  grid-area: left;
+  justify-self: left;
+  grid-area: right;
   color: black;
   margin: 10px;
+  width: 20vw;
 }
 
 .neeb {
+  grid-area: main;
+  margin-left: 0;
+  margin-right:0;
+  display: flex;
+  align-content: stretch;
+  
+}
+
+.main {
   margin-left: 0;
   margin-right:0;
   display: grid;
-  grid-template-columns: 20vw 30vw 15vw 35vw;
+  grid-template-columns: 15vw 90vw;
   grid-template-rows: auto;
   grid-template-areas: 
-    "left main main sidebar"
-    "left submain submain sidebar";
+    "nav nav"
+    "left main"
+    "left submain";
 }
 
 .e-waste-list {
@@ -101,7 +125,7 @@ li {cursor: pointer}
 }
 
 .ro-order-list {
-  grid-area:sidebar;
+  grid-area:right;
   justify-self: left;
   width: 75%;
 }
@@ -113,7 +137,7 @@ li {cursor: pointer}
 }
 
 .last-orders {
-  grid-area:sidebar;
+  grid-area:right;
   justify-self: left;
   height: 5rem;
 }
@@ -125,4 +149,107 @@ li {cursor: pointer}
 
 .ne-header p {
   margin-top: 3px;
+}
+
+.navbar {
+  grid-area:nav;
+  background-color: #2E3D4E;
+  color: #FFF;
+}
+
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color:#F7F7F7;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar {
+    /* don't forget to add all the previously mentioned styles here too */
+    grid-area: left;
+    background: #2C3B4A;
+    color: #F7F7F7;
+    transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #2C3B4A;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #BFBDC1;
+}
+
+#sidebar ul p {
+    color: #F7F7F7;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #424B54;
+    background: #E1E1E1;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #F7F7F7;
+    background: #424B54;
+}
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #424B54;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+      margin-left: -250px;
+  }
+  #sidebar.active {
+      margin-left: 0;
+  }
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+}
+
+.report {
+  grid-area: main;
 }

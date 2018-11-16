@@ -54,7 +54,7 @@ class AmzLabels extends Component {
   }
 
   render() {
-    const labels = <div className="container">
+    const labels = <div className="report">
       <h3 className="card-header"> Amazon Labels </h3>
       <form className="form-inline" onSubmit={this.onUpload}>
         <div className="form-group">
@@ -68,7 +68,7 @@ class AmzLabels extends Component {
       
     </div>;
     return (
-      <div>
+      <div className='wrapper'>
         {labels}
       </div>
     );
