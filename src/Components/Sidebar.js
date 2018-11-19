@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import "../App.css";
+import "./App.css";
+import { NavLink } from 'react-router-dom'
 
 class Sidebar extends Component {
   state = {
-    ordersPicked: [],
-    posReceived: [],
-    fbaShipped: [],
-    ordersShipped: [],
-    update: false,
   }
 
   render() {
@@ -19,10 +15,13 @@ class Sidebar extends Component {
             <a href="#fbaSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">FBA</a>
             <ul className="collapse list-unstyled" id="fbaSubmenu">
               <li>
-                <a href="#">Amazon Labels</a>
+              <NavLink className="nav-link" to="/ro">Removal Order Report</NavLink>
               </li>
               <li>
-                <a href="#">FNSKU Labels</a>
+              <NavLink className="nav-link" to="/amzlabels">Amazon Labels</NavLink>
+              </li>
+              <li>
+              <NavLink className="nav-link" to="/fnsku">FNSKU Labels</NavLink>
               </li>
             </ul>
           </li>
@@ -30,7 +29,7 @@ class Sidebar extends Component {
             <a href="#invSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Inventory</a>
             <ul className="collapse list-unstyled" id="invSubmenu">
               <li>
-                <a href="#">Amazon Labels</a>
+              <NavLink className="nav-link" to="/">Nothing Here</NavLink>
               </li>
             </ul>
           </li>
@@ -38,7 +37,13 @@ class Sidebar extends Component {
             <a href="#soSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Sales Orders</a>
             <ul className="collapse list-unstyled" id="soSubmenu">
               <li>
-                <a href="#">Newegg Report</a>
+              <NavLink className="nav-link" to="/neebreport">Newegg Ebay Report</NavLink>
+              </li>
+              <li>
+              <NavLink className="nav-link" to="/ca">Newegg Canada Report</NavLink>
+              </li>
+              <li>
+              <NavLink className="nav-link" to="/amzca">Amazon Canada Report</NavLink>
               </li>
             </ul>
           </li>

@@ -13,6 +13,12 @@ body {
   height: 80px;
 }
 
+#wo-textarea {
+  width: 200px;
+  background-color:#F7F7F7;
+  border: none;
+}
+
 .App-header {
   background-color: #222;
   height: 150px;
@@ -153,9 +159,10 @@ li {cursor: pointer}
 
 .navbar {
   grid-area:nav;
-  background-color: #2E3D4E;
+  background-color: #2C3B4A;
   color: #FFF;
 }
+
 
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";

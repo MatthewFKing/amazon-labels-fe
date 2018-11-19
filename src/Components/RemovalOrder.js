@@ -210,12 +210,12 @@ class RemovalOrder extends Component {
             </div>
           </div>
         </div>
-        <div className="card ro-forms">
+        <div className="neeb-form">
           <h3 className="card-header">Removal Order Generator</h3>
           <form className="form-inline" onSubmit={this.onUpload}>
             <div className="form-group">
               <input
-                className="form-control"
+                className="form-control-file"
                 ref={ref => {
                   this.uploadInput = ref;
                 }}
@@ -231,7 +231,7 @@ class RemovalOrder extends Component {
           <form className="form-inline" onSubmit={this.onUploadParts}>
             <div className="form-group">
               <input
-                className="form-control"
+                className="form-control-file"
                 ref={ref => {
                   this.partsList = ref;
                 }}
@@ -251,7 +251,7 @@ class RemovalOrder extends Component {
                 ) : (
                     <input
                       type="text"
-                      className="form-control mb-2"
+                      className="form-control-file mb-2"
                       placeholder="1234"
                       value={this.state.ufNum}
                       onChange={this.updateUfNum}

@@ -69,8 +69,8 @@ class FNSKULabels extends Component {
     const { open } = this.state;
     const labels = <div className='container'>
       <h3 className="card-header"> FNSKU Labels </h3>
-      <div className='card'>
-        <textarea className="form-control" aria-label="Amount" value={this.state.orderNumbers} onChange={this.addOrders}></textarea>
+      <div className='card' id="wo-textarea">
+        <textarea className="form-control" rows="10" aria-label="Amount" value={this.state.orderNumbers} onChange={this.addOrders}></textarea>
         <button className='btn' onClick={this.submit}>Submit</button>
       </div>
     </div>;

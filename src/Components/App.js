@@ -7,7 +7,8 @@ import HomeReport from './HomeReport.js';
 import NeweggCA from './NeweggCA';
 import AmazonCA from './AmazonCA';
 import Nav from './Nav.js';
-import Sidebar from './FBA/Sidebar';
+import Sidebar from './Sidebar';
+import FNSKULabels from './FNSKULabels';
 import Test from './Test.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -28,6 +29,7 @@ class App extends Component {
         <Route path="/test" component={Test}/>
         <Route path="/ca" component={NeweggCA}/>
         <Route path="/amzca" component={AmazonCA}/>
+        <Route path="/fnsku" component={FNSKULabels}/>
         
         </div>
       </Router>

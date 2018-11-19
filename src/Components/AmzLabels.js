@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
-import FNSKULabels from './FNSKULabels';
 import './App.css';
 
 class AmzLabels extends Component {
@@ -58,13 +57,12 @@ class AmzLabels extends Component {
       <h3 className="card-header"> Amazon Labels </h3>
       <form className="form-inline" onSubmit={this.onUpload}>
         <div className="form-group">
-          <input className="form-control" ref={(ref) => { this.uploadInput = ref; }} type="file" />
+          <input className="form-control-file" ref={(ref) => { this.uploadInput = ref; }} type="file" />
         </div>
         <button className="btn btn-primary">Upload</button>
         <small className="text-danger">{this.state.error}</small>
       </form>
       <br/>
-      <div><FNSKULabels/></div>
       
     </div>;
     return (

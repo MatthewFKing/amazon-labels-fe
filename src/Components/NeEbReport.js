@@ -174,7 +174,7 @@ class NeEbReport extends Component {
             <div className="form-group">
               <h4>Ebay Report</h4>
               <input
-                className="form-control"
+                className="form-control-file"
                 ref={ref => {
                   this.uploadEB = ref;
                 }}
@@ -185,7 +185,7 @@ class NeEbReport extends Component {
                 <h4>Newegg Report</h4><p>Last Completed: {this.state.lastOrders[0]}</p>
               </div>
               <input
-                className="form-control"
+                className="form-control-file"
                 ref={ref => {
                   this.uploadNE = ref;
                 }}
@@ -197,7 +197,7 @@ class NeEbReport extends Component {
             
 
           </form>
-          <button className='btn btn-warning' onClick={this.toggleDeleteIDs}>Clear Completed Newegg Orders</button>
+          <button className='btn btn-warning' onClick={this.toggleDeleteIDs}>Clear Orders</button>
         </div>
         <div className="instructions">
           <button
