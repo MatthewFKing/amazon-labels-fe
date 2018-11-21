@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import RemovalOrder from './RemovalOrder.js';
+import RemovalOrder from './FBA/RemovalOrder.js';
 import './App.css';
-import NeEbReport from './NeEbReport.js';
-import AmzLabels from './AmzLabels.js';
+import NeEbReport from './SalesOrders/NeEbReport.js';
+import AmzLabels from './FBA/AmzLabels.js';
 import HomeReport from './HomeReport.js';
-import NeweggCA from './NeweggCA';
-import AmazonCA from './AmazonCA';
+import NeweggCA from './SalesOrders/NeweggCA';
+import AmazonCA from './SalesOrders/AmazonCA';
 import Nav from './Nav.js';
 import Sidebar from './Sidebar';
-import FNSKULabels from './FNSKULabels';
+import FNSKULabels from './FBA/FNSKULabels';
 import Test from './Test.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
 
+  componentDidMount() {
+    console.log('mount');
+  }
   render() {
     
     return (

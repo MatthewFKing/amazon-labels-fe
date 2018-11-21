@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import fileDownload from "js-file-download";
 import axios from "axios";
-import Instructions from './Instructions';
-import "./App.css";
+import Instructions from '../Instructions';
+import "../App.css";
 
 class NeweggCA extends Component {
   state = {

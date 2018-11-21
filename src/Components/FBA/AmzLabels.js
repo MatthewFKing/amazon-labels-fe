@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
-import './App.css';
+import '../App.css';
 
 class AmzLabels extends Component {
 
@@ -53,9 +53,9 @@ class AmzLabels extends Component {
   }
 
   render() {
-    const labels = <div className="report">
+    const labels = <div>
       <h3 className="card-header"> Amazon Labels </h3>
-      <form className="form-inline" onSubmit={this.onUpload}>
+      <form onSubmit={this.onUpload}>
         <div className="form-group">
           <input className="form-control-file" ref={(ref) => { this.uploadInput = ref; }} type="file" />
         </div>
@@ -66,7 +66,7 @@ class AmzLabels extends Component {
       
     </div>;
     return (
-      <div className='wrapper'>
+      <div className='neeb'>
         {labels}
       </div>
     );

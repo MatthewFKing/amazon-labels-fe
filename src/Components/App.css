@@ -87,6 +87,7 @@ li {cursor: pointer}
   color: black;
   margin: 10px;
   width: 20vw;
+  padding: 10px;
 }
 
 .neeb {
@@ -95,14 +96,14 @@ li {cursor: pointer}
   margin-right:0;
   display: flex;
   align-content: stretch;
-  
+  padding: 10px;
 }
 
 .main {
   margin-left: 0;
   margin-right:0;
   display: grid;
-  grid-template-columns: 15vw 90vw;
+  grid-template-columns: 15vw 84vw;
   grid-template-rows: auto;
   grid-template-areas: 
     "nav nav"
@@ -154,13 +155,19 @@ li {cursor: pointer}
 }
 
 .ne-header p {
-  margin-top: 3px;
+  margin: 0;
 }
+
+
 
 .navbar {
   grid-area:nav;
   background-color: #2C3B4A;
   color: #FFF;
+}
+
+.instructions .btn-warning {
+  margin: 5px;
 }
 
 
@@ -259,4 +266,6 @@ a[data-toggle="collapse"] {
 
 .report {
   grid-area: main;
+  display: flex;
+  justify-content: flex-start;
 }

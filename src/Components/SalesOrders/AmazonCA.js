@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import fileDownload from "js-file-download";
 import axios from "axios";
-import "./App.css";
+import "../App.css";
 
 class AmazonCA extends Component {
   state = {
@@ -114,6 +114,39 @@ class AmazonCA extends Component {
 
     return (
       <div className="container neeb">
+        
+        <div className="neeb-form">
+          <h3 className="card-header">Amazon Canada Order Report</h3>
+
+          <form onSubmit={this.onUpload}>
+            <div className="form-group">
+              <h4>Amazon Unshipped Report</h4>
+
+                  <input
+                    className="form-control-file"
+                    id="inputGroupFile01"
+                    ref={ref => {
+                      this.AmazonUnshipped = ref;
+                    }}
+                    type="file"
+                    onChange={this.onUploadUnshipped}
+                  />
+                  <br/>
+              <h4>Amazon All Orders Report</h4>
+                  <input
+                    className="form-control-file"
+                    id="inputGroupFile02"
+                    ref={ref => {
+                      this.AmazonAllOrders = ref;
+                    }}
+                    type="file"
+                    onChange={this.onUploadAll}
+                  />
+
+            </div>
+            {this.state.error ? <div class="alert alert-danger" role="alert">{this.state.error}</div> : null}
+          </form>
+        </div>
         <div className="instructions">
           <button
             className="btn btn-light"
@@ -136,37 +169,6 @@ class AmazonCA extends Component {
               <p>6. Import the sales report to Fishbowl and verify the information is correct.</p>
             </div>
           </div>
-        </div>
-        <div className="neeb-form">
-          <h3 className="card-header">Amazon Canada Order Report</h3>
-
-          <form onSubmit={this.onUpload}>
-            <div className="form-group">
-              <h5>Amazon Unshipped Report</h5>
-
-                  <input
-                    className="form-control-file"
-                    id="inputGroupFile01"
-                    ref={ref => {
-                      this.AmazonUnshipped = ref;
-                    }}
-                    type="file"
-                    onChange={this.onUploadUnshipped}
-                  />
-              <h5>Amazon All Orders Report</h5>
-                  <input
-                    className="form-control-file"
-                    id="inputGroupFile02"
-                    ref={ref => {
-                      this.AmazonAllOrders = ref;
-                    }}
-                    type="file"
-                    onChange={this.onUploadAll}
-                  />
-
-            </div>
-            {this.state.error ? <div class="alert alert-danger" role="alert">{this.state.error}</div> : null}
-          </form>
         </div>
         {this.state.caOrderIDs.length > 0 ? orderIDList : null}
       </div>

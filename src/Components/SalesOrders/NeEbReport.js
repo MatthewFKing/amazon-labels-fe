@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
-import "./App.css";
+import "../App.css";
 
 class NeEbReport extends Component {
   state = {
@@ -73,11 +73,10 @@ class NeEbReport extends Component {
       let reader = new FileReader();
       reader.onload = () => {
         let data = reader.result.split("\r\n").map(line => {
-          return line.split(/,/).map(text => {
+          return line.split(/","/).map(text => {
             return text.replace(/"/g, "");
           });
         });
-
         let orders = data.filter(line => {
           return line[10] === "United States";
         });
@@ -150,11 +149,11 @@ class NeEbReport extends Component {
         <h5 className="card-header">Select the Orders to Remove</h5>
         {this.state.lastOrders.map((ID, index) => (
           <li
-          className={
-            this.state.ordersToDelete.indexOf(ID) > -1
-              ? "list-group-item active"
-              : "list-group-item"
-          }
+            className={
+              this.state.ordersToDelete.indexOf(ID) > -1
+                ? "list-group-item active"
+                : "list-group-item"
+            }
             onClick={e => this.addToDelete(ID, e)}
             key={index}>
             {ID}
@@ -165,8 +164,8 @@ class NeEbReport extends Component {
     );
 
     return (
-      <div className="container neeb">
-        
+      <div className="neeb">
+
         <div className="neeb-form">
           <h3 className="card-header">Newegg Ebay Sales Order Report</h3>
 
@@ -181,6 +180,7 @@ class NeEbReport extends Component {
                 type="file"
                 onChange={this.EBFileSelect}
               />
+              <br />
               <div className='ne-header'>
                 <h4>Newegg Report</h4><p>Last Completed: {this.state.lastOrders[0]}</p>
               </div>
@@ -192,14 +192,12 @@ class NeEbReport extends Component {
                 type="file"
               />
             </div>
-
             <button className="btn btn-primary">Upload</button>
-            
-
           </form>
-          <button className='btn btn-warning' onClick={this.toggleDeleteIDs}>Clear Orders</button>
         </div>
+
         <div className="instructions">
+          <button className='btn btn-warning' onClick={this.toggleDeleteIDs}>Clear Orders</button>
           <button
             className="btn btn-light"
             type="button"
@@ -224,6 +222,7 @@ class NeEbReport extends Component {
             </div>
           </div>
         </div>
+
         {this.state.ebOrders.length > 0 ? ebOrders : null}
         {this.state.toggleDeleteIDs ? completedOrders : null}
       </div>

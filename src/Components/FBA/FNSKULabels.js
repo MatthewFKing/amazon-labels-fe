@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 import Modal from 'react-responsive-modal';
-import './App.css';
+import '../App.css';
 
 class FNSKULabels extends Component {
 
@@ -67,7 +67,7 @@ class FNSKULabels extends Component {
 
   render() {
     const { open } = this.state;
-    const labels = <div className='container'>
+    const labels = <div>
       <h3 className="card-header"> FNSKU Labels </h3>
       <div className='card' id="wo-textarea">
         <textarea className="form-control" rows="10" aria-label="Amount" value={this.state.orderNumbers} onChange={this.addOrders}></textarea>
@@ -75,7 +75,7 @@ class FNSKULabels extends Component {
       </div>
     </div>;
     return (
-      <div>
+      <div className='neeb'>
         <Modal open={open} onClose={this.onCloseModal} center>
           <h2>Error</h2>
           {this.state.errorMessage.map((message, index) => (

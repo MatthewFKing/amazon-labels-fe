@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
-import "./App.css";
+import "../App.css";
 
 class RemovalOrder extends Component {
   state = {
@@ -183,33 +183,8 @@ class RemovalOrder extends Component {
     );
 
     return (
-      <div className="container ro neeb">
-        <div className="instructions">
-          <button
-            className="btn btn-light"
-            type="button"
-            data-toggle="collapse"
-            data-target="#collapseExample"
-            aria-expanded="false"
-            aria-controls="collapseExample"
-          >
-            Instructions
-          </button>
-          <div className="collapse" id="collapseExample">
-            <div className="card card-body">
-              <h4>Instructions for Use:</h4>
-              <p>1. Download the Removal Order Detail Report from Amazon.
-                <a className="" rel="noopener noreferrer" href="https://sellercentral.amazon.com/gp/ssof/reports/search.html#orderAscending=&recordType=REMOVAL_ORDER_DETAIL&noResultType=&merchantSku=&fnSku=&FnSkuXORMSku=&reimbursementId=&orderId=&genericOrderId=&asin=&lpn=&shipmentId=&problemType=ALL_DEFECT_TYPES&hazmatStatus=&inventoryEventTransactionType=&fulfillmentCenterId=&inventoryAdjustmentReasonGroup=&eventDateOption=1&fromDate=mm%2Fdd%2Fyyyy&toDate=mm%2Fdd%2Fyyyy&startDate=&endDate=&fromMonth=1&fromYear=2018&toMonth=1&toYear=2018&startMonth=&startYear=&endMonth=&endYear=" target="_blank"> Link</a>
-              </p>
-              <p>2. Drag the downloaded file to the Removal Order Generator section.</p>
-              <p>3. Select the Order IDs that you need from the list.</p>
-              <p>4. Click "Submit" at the bottom of this list and the Fishbowl TO, Parts and Inventory Reports will be
-              downloaded.</p>
-              <p>5. Open Fishbowl and upload the reports in this order: Parts - Inventory - TO</p>
-              <p>6. Verify that the correct information has been uploaded to Fishbowl.</p>
-            </div>
-          </div>
-        </div>
+      <div className="neeb">
+
         <div className="neeb-form">
           <h3 className="card-header">Removal Order Generator</h3>
           <form className="form-inline" onSubmit={this.onUpload}>
@@ -269,6 +244,33 @@ class RemovalOrder extends Component {
               </div>
             </div>
           </form>
+
+        </div>
+        <div className="instructions">
+          <button
+            className="btn btn-light"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Instructions
+          </button>
+          <div className="collapse" id="collapseExample">
+            <div className="card card-body">
+              <h4>Instructions for Use:</h4>
+              <p>1. Download the Removal Order Detail Report from Amazon.
+                <a className="" rel="noopener noreferrer" href="https://sellercentral.amazon.com/gp/ssof/reports/search.html#orderAscending=&recordType=REMOVAL_ORDER_DETAIL&noResultType=&merchantSku=&fnSku=&FnSkuXORMSku=&reimbursementId=&orderId=&genericOrderId=&asin=&lpn=&shipmentId=&problemType=ALL_DEFECT_TYPES&hazmatStatus=&inventoryEventTransactionType=&fulfillmentCenterId=&inventoryAdjustmentReasonGroup=&eventDateOption=1&fromDate=mm%2Fdd%2Fyyyy&toDate=mm%2Fdd%2Fyyyy&startDate=&endDate=&fromMonth=1&fromYear=2018&toMonth=1&toYear=2018&startMonth=&startYear=&endMonth=&endYear=" target="_blank"> Link</a>
+              </p>
+              <p>2. Drag the downloaded file to the Removal Order Generator section.</p>
+              <p>3. Select the Order IDs that you need from the list.</p>
+              <p>4. Click "Submit" at the bottom of this list and the Fishbowl TO, Parts and Inventory Reports will be
+              downloaded.</p>
+              <p>5. Open Fishbowl and upload the reports in this order: Parts - Inventory - TO</p>
+              <p>6. Verify that the correct information has been uploaded to Fishbowl.</p>
+            </div>
+          </div>
         </div>
         {this.state.roIDs.length > 0 ? poList : null}
         {this.state.missingParts.length > 1 ? missingPartsList : null}
