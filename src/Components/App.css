@@ -73,7 +73,10 @@ li {cursor: pointer}
 .eb-clear {
   grid-area: submain;
   justify-self: center;
-  width: 25vw;
+  width: 20vw;
+  background-color: #F7F7F7;
+  border: none;
+  margin: 0;
 }
 
 .card-header {

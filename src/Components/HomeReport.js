@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import "./App.css";
 
 class HomeReport extends Component {
@@ -6,18 +7,31 @@ class HomeReport extends Component {
     ordersPicked: [],
     posReceived: [],
     fbaShipped: [],
+    pendingWO: '',
     ordersShipped: [],
     update: false,
   }
 
+  url = "http://10.0.0.234:3060/reports";
+
   update = () => {
-    this.setState({ update: !this.state.update });
+    axios.get(this.url)
+      .then(response => {
+        console.log(response);
+        this.setState({
+          fbaShipped: response.data.shippedQty,
+          pendingWO: response.data.unshippedQty
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   onUploadPicking = (e) => {
     e.preventDefault();
     
-  }
+  };
 
   render() {
     const updateForm = (
@@ -48,8 +62,8 @@ class HomeReport extends Component {
         <div className="card">
           <h5 className="card-header">FBA</h5>
           <div className="card-body">
-            <p className="card-text">Units Shipped: 125</p>
-            <p className="card-text">Parts Shipped: 243</p>
+            <p className="card-text">Units Shipped Yesterday: {this.state.fbaShipped}</p>
+            <p className="card-text">Pending Work Orders: {this.state.pendingWO}</p>
           </div>
         </div>
         <div className="card">

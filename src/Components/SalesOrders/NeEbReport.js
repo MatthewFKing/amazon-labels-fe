@@ -62,6 +62,13 @@ class NeEbReport extends Component {
           type: "text/csv"
         });
         fileDownload(fbReport, `NE EB Report.csv`);
+        this.setState({
+          ebOrders: [],
+          clearedEBOrders: [],
+          ebReport: [],
+        });
+        this.uploadEB.value = null;
+        this.uploadNE.value = null;
       })
       .catch(error => {
         console.log(error);
@@ -127,7 +134,7 @@ class NeEbReport extends Component {
   render() {
     const ebOrders = (
       <div className="card eb-clear">
-        <h5 className="card-header">Select Cleared Orders</h5>
+        <h4 className="card-header">Select Cleared Ebay Orders</h4>
         {this.state.ebOrders.map((ID, index) => (
           <li
             className={
@@ -194,6 +201,7 @@ class NeEbReport extends Component {
             </div>
             <button className="btn btn-primary">Upload</button>
           </form>
+          {this.state.ebOrders.length > 0 ? ebOrders : null}
         </div>
 
         <div className="instructions">
@@ -223,7 +231,7 @@ class NeEbReport extends Component {
           </div>
         </div>
 
-        {this.state.ebOrders.length > 0 ? ebOrders : null}
+
         {this.state.toggleDeleteIDs ? completedOrders : null}
       </div>
     );

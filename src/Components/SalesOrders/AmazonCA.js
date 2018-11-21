@@ -145,6 +145,7 @@ class AmazonCA extends Component {
 
             </div>
             {this.state.error ? <div class="alert alert-danger" role="alert">{this.state.error}</div> : null}
+            {this.state.caOrderIDs.length > 0 ? orderIDList : null}
           </form>
         </div>
         <div className="instructions">
@@ -170,7 +171,7 @@ class AmazonCA extends Component {
             </div>
           </div>
         </div>
-        {this.state.caOrderIDs.length > 0 ? orderIDList : null}
+        
       </div>
     );
   }
