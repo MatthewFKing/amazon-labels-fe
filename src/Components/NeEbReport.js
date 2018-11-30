@@ -73,10 +73,13 @@ class NeEbReport extends Component {
       let reader = new FileReader();
       reader.onload = () => {
         let data = reader.result.split("\r\n").map(line => {
-          return line.split(/,/).map(text => {
+          console.log(line);
+          return line.split(/","/).map(text => {
             return text.replace(/"/g, "");
           });
         });
+
+        console.log(data);
 
         let orders = data.filter(line => {
           return line[10] === "United States";

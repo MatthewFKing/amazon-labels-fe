@@ -128,7 +128,7 @@ class AmazonCA extends Component {
           <div className="collapse" id="collapseExample">
             <div className="card card-body">
               <h4>Instructions for Use:</h4>
-              <p>1. Download an updated Unshipped Order Report from Amazon. <a className="" rel="noopener noreferrer" href="https://sellercentral.amazon.com/order-reports-and-feeds/reports/unshippedOrders#" target="_blank">Link</a></p>
+              <p>1. Download an updated Unshipped Order Report from Amazon (Change Date Range to 30 Days.) <a className="" rel="noopener noreferrer" href="https://sellercentral.amazon.com/order-reports-and-feeds/reports/unshippedOrders#" target="_blank">Link</a></p>
               <p>2. Download an updated Amazon All Orders Report. <a className="" rel="noopener noreferrer" href="https://sellercentral.amazon.com/gp/ssof/reports/search.html#orderAscending=&recordType=FlatFileAllOrdersReport&noResultType=&merchantSku=&fnSku=&FnSkuXORMSku=&reimbursementId=&orderId=&genericOrderId=&asin=&lpn=&shipmentId=&problemType=ALL_DEFECT_TYPES&hazmatStatus=&inventoryEventTransactionType=&fulfillmentCenterId=&inventoryAdjustmentReasonGroup=&eventDateOption=1&fromDate=mm%2Fdd%2Fyyyy&toDate=mm%2Fdd%2Fyyyy&startDate=&endDate=&fromMonth=1&fromYear=2018&toMonth=1&toYear=2018&startMonth=&startYear=&endMonth=&endYear=#" target="_blank">Link</a></p>
               <p>3. Drag the reports to their corresponding sections.</p>
               <p>4. Select the Amazon orders that need to be dropped from the list. </p>
