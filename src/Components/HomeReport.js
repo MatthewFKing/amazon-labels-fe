@@ -12,6 +12,9 @@ class HomeReport extends Component {
     update: false,
   }
 
+  componentDidMount() {
+    this.update();
+  }
   url = "http://10.0.0.234:3060/reports";
 
   update = () => {
@@ -50,26 +53,13 @@ class HomeReport extends Component {
 
     return (
       <div className="container">
-        <button className='btn' onClick={this.update}>Update</button>
+        
         {this.state.update ? updateForm : null}
-        <div className="card">
-          <h5 className="card-header">Inventory</h5>
-          <div className="card-body">
-            <p className="card-text">Orders Picked: 78</p>
-            <p className="card-text">POs Received: 78</p>
-          </div>
-        </div>
         <div className="card">
           <h5 className="card-header">FBA</h5>
           <div className="card-body">
             <p className="card-text">Units Shipped Yesterday: {this.state.fbaShipped}</p>
             <p className="card-text">Pending Work Orders: {this.state.pendingWO}</p>
-          </div>
-        </div>
-        <div className="card">
-          <h5 className="card-header">Shipping</h5>
-          <div className="card-body">
-            <p className="card-text">Orders Shipped: 35</p>
           </div>
         </div>
       </div>
