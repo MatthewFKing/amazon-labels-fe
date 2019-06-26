@@ -14,7 +14,7 @@ class NeEbReport extends Component {
     ordersToDelete: [],
   };
 
-  url = "http://10.0.0.234:3060";
+  url = "http://10.0.0.234:3030";
 
   componentDidMount() {
     let url = `${this.url}/nenum`;
@@ -79,13 +79,14 @@ class NeEbReport extends Component {
     if (this.uploadEB.files[0]) {
       let reader = new FileReader();
       reader.onload = () => {
-        let data = reader.result.split("\r\n").map(line => {
-          return line.split(/","/).map(text => {
+        let data = reader.result.split("\n").map(line => {
+          return line.split(/,/).map(text => {
             return text.replace(/"/g, "");
           });
         });
+        console.log(data);
         let orders = data.filter(line => {
-          return line[10] === "United States";
+          return line[11] === "United States";
         });
 
         this.setState({ ebReport: orders });

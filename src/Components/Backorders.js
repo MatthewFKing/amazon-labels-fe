@@ -14,19 +14,7 @@ class Backorders extends Component {
     ordersToDelete: [],
   };
 
-  url = "http://10.0.0.234:3060";
-
-  componentDidMount() {
-    let url = `${this.url}/nenum`;
-    
-  }
-
-  onUpload = e => {
-    e.preventDefault();
-    let data = null;
-    let url = `${this.url}/neebreport`;
-    
-  };
+  url = "http://10.0.0.234:3030";
 
 
   render() {
@@ -34,53 +22,7 @@ class Backorders extends Component {
     return (
       <div className="container neeb">
 
-        <div className="instructions">
-          <button
-            className="btn btn-light"
-            type="button"
-            data-toggle="collapse"
-            data-target="#collapseExample"
-            aria-expanded="false"
-            aria-controls="collapseExample"
-          >
-            Instructions
-          </button>
-          <div className="collapse" id="collapseExample">
-            <div className="card card-body">
-
-            </div>
-          </div>
-        </div>
-        <div className="neeb-form">
-          <h3 className="card-header">Backorder Report</h3>
-
-          <form onSubmit={this.onUpload}>
-            <div className="form-group">
-              <h4>Fishbowl Report</h4>
-              <input
-                className="form-control"
-                ref={ref => {
-                  this.uploadFB = ref;
-                }}
-                type="file"
-              />
-              <div className='ne-header'>
-                <h4>Amazon Unshipped Report</h4>
-              </div>
-              <input
-                className="form-control"
-                ref={ref => {
-                  this.uploadAMZ = ref;
-                }}
-                type="file"
-              />
-            </div>
-
-            <button className="btn btn-primary">Upload</button>
-
-
-          </form>
-        </div>
+        
 
       </div>
     );
@@ -89,6 +31,16 @@ class Backorders extends Component {
 
 export default Backorders;
 
-    //if ebay only upload report and cleared orders
-    //if newegg only upload formdata only
-    //if both first request cleared orders and then send everything as form data
+    //Scan Order IDs to add to backorders.
+    //Display the Product SKU and QTY, Order #, Customer PO #, Due Date, Backordered Part.
+    //Product SKU and QTY, Order #, Customer PO #, Due Date, Order Date,  - From SO Data
+    //Backordered Part - From BOM Data
+    //Show Open POs for that Part - PO Data
+    //
+    //Needs: 
+    //Ability to switch or add the part thats holding the order up.
+    //Remove the order manually or remove if the status of that order is changed in the SO report to in progress
+    //Sort by due date or sort by model type 
+    //Backordered Item Totals.
+    //Backordered Item breakdown/report
+

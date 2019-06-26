@@ -12,7 +12,7 @@ class AmzLabels extends Component {
     error: ""
   };
 
-  url = "http://10.0.0.234:3060";
+  url = "http://10.0.0.234:3030";
 
   onUpload = e => {
     e.preventDefault();

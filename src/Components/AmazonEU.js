@@ -14,7 +14,7 @@ class AmazonEU extends Component {
     error: '',
   };
 
-  url = "http://10.0.0.234:3060/uk";
+  url = "http://10.0.0.234:3030/uk";
 
   onUploadUnshipped = e => {
     e.preventDefault();

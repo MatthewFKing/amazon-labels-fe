@@ -10,7 +10,7 @@ class NeweggCA extends Component {
     neReport: [],
   };
 
-  url = "http://10.0.0.234:3060/ca";
+  url = "http://10.0.0.234:3030/ca";
 
   onUpload = e => {
     e.preventDefault();

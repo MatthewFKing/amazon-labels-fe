@@ -15,7 +15,7 @@ class HomeReport extends Component {
   componentDidMount() {
     this.update();
   }
-  url = "http://10.0.0.234:3060/reports";
+  url = "http://10.0.0.234:3030/reports";
 
   update = () => {
     axios.get(this.url)
