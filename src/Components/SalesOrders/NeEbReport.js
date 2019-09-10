@@ -80,8 +80,9 @@ class NeEbReport extends Component {
       let reader = new FileReader();
       reader.onload = () => {
         let data = reader.result.split("\n").map(line => {
-          return line.split(/,/).map(text => {
-            return text.replace(/"/g, "");
+          return line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(text => {
+            //return text.replace(/"/g, "");
+            return text;  
           });
         });
         console.log(data);

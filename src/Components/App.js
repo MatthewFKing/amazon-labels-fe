@@ -6,6 +6,7 @@ import AmzLabels from './FBA/AmzLabels.js';
 import HomeReport from './HomeReport.js';
 import NeweggCA from './SalesOrders/NeweggCA';
 import AmazonCA from './SalesOrders/AmazonCA';
+import WebOrders from './SalesOrders/WebOrders';
 import Nav from './Nav.js';
 import Sidebar from './Sidebar';
 import FNSKULabels from './FBA/FNSKULabels';
@@ -31,6 +32,7 @@ class App extends Component {
         <Route path="/ca" component={NeweggCA}/>
         <Route path="/amzca" component={AmazonCA}/>
         <Route path="/fnsku" component={FNSKULabels}/>
+        <Route path="/web" component={WebOrders}/>
         
         </div>
       </Router>

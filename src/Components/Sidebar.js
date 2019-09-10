@@ -45,6 +45,9 @@ class Sidebar extends Component {
               <li>
               <NavLink className="nav-link" to="/amzca">Amazon Canada Report</NavLink>
               </li>
+              <li>
+              <NavLink className="nav-link" to="/web">Web Orders</NavLink>
+              </li>
             </ul>
           </li>
         </ul>
