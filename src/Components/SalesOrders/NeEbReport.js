@@ -104,7 +104,7 @@ class NeEbReport extends Component {
       this.setState({ clearedEBOrders });
     } else {
       let clearedEBOrders = [...this.state.clearedEBOrders];
-      var index = clearedEBOrders.indexOf(id);
+      let index = clearedEBOrders.indexOf(id);
       clearedEBOrders.splice(index, 1);
       this.setState({ clearedEBOrders });
     }
@@ -116,7 +116,7 @@ class NeEbReport extends Component {
       this.setState({ ordersToDelete });
     } else {
       let ordersToDelete = [...this.state.ordersToDelete];
-      var index = ordersToDelete.indexOf(id);
+      let index = ordersToDelete.indexOf(id);
       ordersToDelete.splice(index, 1);
       this.setState({ ordersToDelete });
     }
