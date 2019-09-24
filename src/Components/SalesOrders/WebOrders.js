@@ -34,8 +34,9 @@ class WebOrders extends Component {
     let selectedWebOrders = [];
     Array.from(e.target.files).forEach(file => { 
       console.log(file.name.substring(11, 21));
-      selectedWebOrders.push(file.name.substring(11, 21))
+      selectedWebOrders.push([file.name.substring(11, 21), file.name.substring(0, 7)])
     });
+    console.log(selectedWebOrders)
     this.setState({ selectedWebOrders });
   }
 

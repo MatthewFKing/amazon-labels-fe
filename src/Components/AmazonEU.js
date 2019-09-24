@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import fileDownload from "js-file-download";
 import axios from "axios";
-import "./App.css";
+//import "./App.css";
 
 class AmazonEU extends Component {
   state = {

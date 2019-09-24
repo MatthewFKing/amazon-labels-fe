@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
-import "../App.css";
+//import "../App.css";
 
 class NeEbReport extends Component {
   state = {
