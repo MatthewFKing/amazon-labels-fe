@@ -9,7 +9,7 @@ import {
   XAxis,
   XYPlot,
   YAxis,
-  LineMarkSeries
+  LineMarkSeries,
 } from 'react-vis';
 
 class QA extends Component {
@@ -17,6 +17,8 @@ class QA extends Component {
     error: "",
     dates: [],
     pointData: [],
+    techs: [],
+    selectedTech: []
   };
 
   url = "http://10.0.0.234:3030";
@@ -24,80 +26,171 @@ class QA extends Component {
   data = {
   }
 
-  getit = () => {
-    axios.get(`${this.url}/qareport`)
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
+    axios.get(`${this.url}/qainfo`)
       .then(response => {
         console.log(response.data);
-        let dates = response.data.map(entry => {
-          //return moment(entry.date).format('L');
-          return entry.date;
-        });
-        dates = [...new Set(dates)].sort();
-        console.log(dates);
-        this.setState({ dates });
-        let pointData = [];
-        dates.forEach((date, i) => {
-          let pointTotal = response.data.filter(entry => entry.date === date).reduce((total, line) => {
-            if (!isNaN(parseInt(line.pointsValue, 10))) {
-              return total + parseInt(line.pointsValue, 10);
-            } else {
-              return total + 0;
-            }
-        }, 0);
-        pointData.push([i, pointTotal]);
-        
+        this.setState({ techs: response.data })
+
+      })
+      .catch(error => {
+        console.log(error);
       });
-      this.setState({ pointData })
+  }
+
+  addTech = () => {
+    const techs = [
+      {
+        name: "Donald White",
+        number: '43674645',
+      },
+      {
+        name: "Jack Carlson",
+        number: '54112302',
+      },
+      {
+        name: "Scott Kaplan",
+        number: '28959002',
+      },
+      {
+        name: "Jason Wilson",
+        number: '13341839',
+      },
+      {
+        name: "Scott Simpich",
+        number: '73859172',
+      },
+      {
+        name: "Daniel McMahon",
+        number: '64633986',
+      },
+      {
+        name: "Jairo Montenegro",
+        number: '14767040',
+      },
+      {
+        name: "Alex Gilson",
+        number: '77963380',
+      },
+      {
+        name: "Amber Ponder",
+        number: '64939844',
+      },
+      {
+        name: "Sean Stramaglia",
+        number: '93957871',
+      },
+      {
+        name: "Valeria Collins",
+        number: '56376783',
+      },
+      {
+        name: "Nicholas Bryant",
+        number: '19095000',
+      },
+      {
+        name: "Brian Summers",
+        number: '57529758',
+      },
+      {
+        name: "Blake Hayes",
+        number: '29526354',
+      },
+      {
+        name: "Daniel Horton",
+        number: '55404809',
+      },
+      {
+        name: "Ryan Boschen",
+        number: '26886522',
+      },
+      {
+        name: "Logan Simmons",
+        number: '12450483',
+      },
+      {
+        name: "Delonte Inniss",
+        number: '19802526',
+      },
+      {
+        name: "Alistar Feury",
+        number: '53443113',
+      },
+      {
+        name: "Anthony Doersch",
+        number: '88801665',
+      },
+      {
+        name: "Collin Lemmiksoo",
+        number: '14834646',
+      },
+    ];
+    axios.post(`${this.url}/qainfo`, techs)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+
+  getit = (number) => {
+    console.log(number);
+    axios.post(`${this.url}/qalog`, {number})
+      .then(response => {
+        console.log(response.data);
+        this.setState({ pointData: response.data.pointData });
+        this.setState({ dates: response.data.dates });
       });
   }
 
 
   render() {
-    const data = [
-      { x: 1, y: 8 },
-      { x: 2, y: 4 },
-      { x: 3, y: 9 },
-      { x: 4, y: 1 },
-      { x: 5, y: 7 },
-      { x: 6, y: 6 },
-      { x: 7, y: 3 },
-      { x: 8, y: 8 },
-      { x: 9, y: 10 }
-    ];
-    const dates = [
-      '9/1/19',
-      '9/2/19',
-      '9/3/19',
-      '9/4/19',
-      '9/5/19',
-      '9/6/19',
-      '9/7/19',
-      '9/8/19',
-      '9/9/19',
-    ]
 
-    
-    
-      const graph = (
-        <XYPlot height={300} width={1500}
+    const graph = (
+      <XYPlot height={300} width={1500}
+        yDomain={[0, 150]}
         getX={d => d[0]}
         getY={d => d[1]}>
-            <VerticalGridLines />
-            <HorizontalGridLines />
-            <XAxis  tickFormat={v => moment(this.state.dates[v]).format('L')}/>
-            <YAxis/>
-            <LineMarkSeries data={this.state.pointData} />
-          </XYPlot>
-      );
+        <VerticalGridLines />
+        <HorizontalGridLines />
+        <XAxis tickFormat={v => moment(this.state.dates[v + 1]).format('L')} />
+        <YAxis />
+        <LineMarkSeries data={this.state.pointData} />
+      </XYPlot>
+    );
 
     return (
-      <div className="container neeb">
+      <div className="container graphs">
+        
         <div>
+        <div className="btn-group btn-group-sm" role="group" aria-label="Tech Names">
+          <button type="button" className="btn btn-secondary">Total</button>
+          {this.state.techs.map((tech,i) => (
+            <button type="button" 
+              className="btn btn-secondary"
+              onClick={e => this.getit(tech.number)}
+              key={i}>
+              {tech.name}
+              
+            </button>
+          ))}
+        </div>
           <button
             className="btn btn-primary"
             onClick={this.getit}>
             Go on, get
-      </button>
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={this.addTech}>
+            Add it
+          </button>
         </div>
 
         <div>

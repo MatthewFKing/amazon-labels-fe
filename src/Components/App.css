@@ -272,3 +272,14 @@ a[data-toggle="collapse"] {
   display: flex;
   justify-content: flex-start;
 }
+
+.graphs {
+  width: 100vw;
+  margin: 20px;
+}
+
+.btn-secondary{
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  font-size: .78rem !important;
+}
