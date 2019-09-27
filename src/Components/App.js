@@ -7,6 +7,7 @@ import HomeReport from './HomeReport.js';
 import NeweggCA from './SalesOrders/NeweggCA';
 import AmazonCA from './SalesOrders/AmazonCA';
 import WebOrders from './SalesOrders/WebOrders';
+import QALog from './QALog';
 import QA from './QA';
 import Nav from './Nav.js';
 import Sidebar from './Sidebar';
@@ -35,6 +36,7 @@ class App extends Component {
         <Route path="/fnsku" component={FNSKULabels}/>
         <Route path="/web" component={WebOrders}/>
         <Route path="/qa" component={QA}/>
+        <Route path="/qalog" component={QALog}/>
         
         </div>
       </Router>

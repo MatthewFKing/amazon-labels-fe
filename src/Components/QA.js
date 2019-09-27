@@ -18,7 +18,24 @@ class QA extends Component {
     dates: [],
     pointData: [],
     techs: [],
-    selectedTech: []
+    selectedTech: [],
+    staticData: [ [ 0, 60 ],
+    [ 1, 64 ],
+    [ 2, 36 ],
+    [ 3, 91 ],
+    [ 4, 88 ],
+    [ 5, 62 ],
+    [ 6, 54 ],
+    [ 7, 79 ],
+    [ 8, 55 ],
+    [ 9, 38 ],
+    [ 10, 92 ],
+    [ 11, 60 ],
+    [ 12, 72 ],
+    [ 13, 92 ],
+    [ 14, 65 ],
+    [ 15, 110 ],
+    [ 16, 32 ] ],
   };
 
   url = "http://10.0.0.234:3030";
@@ -152,6 +169,8 @@ class QA extends Component {
 
   render() {
 
+
+
     const graph = (
       <XYPlot height={300} width={1500}
         yDomain={[0, 150]}
@@ -162,6 +181,7 @@ class QA extends Component {
         <XAxis tickFormat={v => moment(this.state.dates[v + 1]).format('L')} />
         <YAxis />
         <LineMarkSeries data={this.state.pointData} />
+        <LineMarkSeries data={this.state.staticData} />
       </XYPlot>
     );
 

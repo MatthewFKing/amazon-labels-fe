@@ -29,7 +29,10 @@ class Sidebar extends Component {
             <a href="#invSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Inventory</a>
             <ul className="collapse list-unstyled" id="invSubmenu">
               <li>
-              <NavLink className="nav-link" to="/qa">QA</NavLink>
+                <NavLink className="nav-link" to="/qa">Production Reports</NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" to="/qalog">QA Log</NavLink>
               </li>
             </ul>
           </li>
