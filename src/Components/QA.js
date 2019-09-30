@@ -155,6 +155,16 @@ class QA extends Component {
       });
   }
 
+  updateLog = () => {
+    axios.get(`${this.url}/updatelog`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
 
   getit = (number) => {
     console.log(number);
@@ -203,8 +213,8 @@ class QA extends Component {
         </div>
           <button
             className="btn btn-primary"
-            onClick={this.getit}>
-            Go on, get
+            onClick={this.updateLog}>
+            UpdateLog
           </button>
           <button
             className="btn btn-primary"
