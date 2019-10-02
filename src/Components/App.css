@@ -283,3 +283,8 @@ a[data-toggle="collapse"] {
   word-wrap: break-word !important;
   font-size: .78rem !important;
 }
+
+.table {
+  font-size: .8rem;
+  font-family: 'Verdana', sans-serif;
+}

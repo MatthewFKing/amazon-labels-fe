@@ -38,7 +38,7 @@ class QA extends Component {
     [ 16, 32 ] ],
   };
 
-  url = "http://10.0.0.234:3030";
+  url = "http://10.0.0.234:3030/qa";
 
   data = {
   }
@@ -50,7 +50,7 @@ class QA extends Component {
   getData = () => {
     axios.get(`${this.url}/qainfo`)
       .then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         this.setState({ techs: response.data })
 
       })
@@ -165,12 +165,22 @@ class QA extends Component {
       })
   }
 
+  updateMonth = () => {
+    axios.get(`${this.url}/updatemonth`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
 
   getit = (number) => {
     console.log(number);
     axios.post(`${this.url}/qalog`, {number})
       .then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         this.setState({ pointData: response.data.pointData });
         this.setState({ dates: response.data.dates });
       });
@@ -218,8 +228,8 @@ class QA extends Component {
           </button>
           <button
             className="btn btn-primary"
-            onClick={this.addTech}>
-            Add it
+            onClick={this.updateMonth}>
+            Update Month
           </button>
         </div>
 
