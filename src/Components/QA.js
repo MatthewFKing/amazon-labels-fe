@@ -17,25 +17,10 @@ class QA extends Component {
     error: "",
     dates: [],
     pointData: [],
+    techReport: {},
     techs: [],
     selectedTech: [],
-    staticData: [ [ 0, 60 ],
-    [ 1, 64 ],
-    [ 2, 36 ],
-    [ 3, 91 ],
-    [ 4, 88 ],
-    [ 5, 62 ],
-    [ 6, 54 ],
-    [ 7, 79 ],
-    [ 8, 55 ],
-    [ 9, 38 ],
-    [ 10, 92 ],
-    [ 11, 60 ],
-    [ 12, 72 ],
-    [ 13, 92 ],
-    [ 14, 65 ],
-    [ 15, 110 ],
-    [ 16, 32 ] ],
+    staticData: [],
   };
 
   url = "http://10.0.0.234:3030/qa";
@@ -60,92 +45,7 @@ class QA extends Component {
   }
 
   addTech = () => {
-    const techs = [
-      {
-        name: "Donald White",
-        number: '43674645',
-      },
-      {
-        name: "Jack Carlson",
-        number: '54112302',
-      },
-      {
-        name: "Scott Kaplan",
-        number: '28959002',
-      },
-      {
-        name: "Jason Wilson",
-        number: '13341839',
-      },
-      {
-        name: "Scott Simpich",
-        number: '73859172',
-      },
-      {
-        name: "Daniel McMahon",
-        number: '64633986',
-      },
-      {
-        name: "Jairo Montenegro",
-        number: '14767040',
-      },
-      {
-        name: "Alex Gilson",
-        number: '77963380',
-      },
-      {
-        name: "Amber Ponder",
-        number: '64939844',
-      },
-      {
-        name: "Sean Stramaglia",
-        number: '93957871',
-      },
-      {
-        name: "Valeria Collins",
-        number: '56376783',
-      },
-      {
-        name: "Nicholas Bryant",
-        number: '19095000',
-      },
-      {
-        name: "Brian Summers",
-        number: '57529758',
-      },
-      {
-        name: "Blake Hayes",
-        number: '29526354',
-      },
-      {
-        name: "Daniel Horton",
-        number: '55404809',
-      },
-      {
-        name: "Ryan Boschen",
-        number: '26886522',
-      },
-      {
-        name: "Logan Simmons",
-        number: '12450483',
-      },
-      {
-        name: "Delonte Inniss",
-        number: '19802526',
-      },
-      {
-        name: "Alistar Feury",
-        number: '53443113',
-      },
-      {
-        name: "Anthony Doersch",
-        number: '88801665',
-      },
-      {
-        name: "Collin Lemmiksoo",
-        number: '14834646',
-      },
-    ];
+    const techs = [];
     axios.post(`${this.url}/qainfo`, techs)
       .then(response => {
         console.log(response.data);
@@ -175,21 +75,55 @@ class QA extends Component {
       })
   }
 
-
   getit = (number) => {
     console.log(number);
-    axios.post(`${this.url}/qalog`, {number})
+    axios.post(`${this.url}/qalog`, { number })
       .then(response => {
         //console.log(response.data);
         this.setState({ pointData: response.data.pointData });
         this.setState({ dates: response.data.dates });
+      })
+      .catch(error => {
+        console.log(error)
       });
+
+      axios.post(`${this.url}/techreport`, { number })
+      .then(response => {
+        //console.log(response.data);
+        this.setState({ techReport: response.data });
+        console.log('techReport')
+      })
+      .catch(error => {
+        console.log(error)
+      });
+
+      
   }
 
 
   render() {
 
 
+    let table = null;
+
+    if (this.state.techReport.prodPoints){
+      
+    
+    table = (
+      <table className="table table-bordered">
+            <tbody>
+              <tr>
+                <td>Best Day: {moment(this.state.techReport.bestDay[0]).format('L')} {this.state.techReport.bestDay[1]}pts</td>
+                <td>Average Points: {parseInt(this.state.techReport.totalPoints / this.state.techReport.daysWorked, 10)}</td>
+                <td>Days Worked: {this.state.techReport.daysWorked}</td>
+              </tr>
+            </tbody>
+          </table>
+    );
+    } else {
+      table = (<div>table</div>)
+    }
+    
 
     const graph = (
       <XYPlot height={300} width={1500}
@@ -207,20 +141,20 @@ class QA extends Component {
 
     return (
       <div className="container graphs">
-        
+
         <div>
-        <div className="btn-group btn-group-sm" role="group" aria-label="Tech Names">
-          <button type="button" className="btn btn-secondary">Total</button>
-          {this.state.techs.map((tech,i) => (
-            <button type="button" 
-              className="btn btn-secondary"
-              onClick={e => this.getit(tech.number)}
-              key={i}>
-              {tech.name}
-              
-            </button>
-          ))}
-        </div>
+          <div className="btn-group btn-group-sm" role="group" aria-label="Tech Names">
+            <button type="button" className="btn btn-secondary">Total</button>
+            {this.state.techs.map((tech, i) => (
+              <button type="button"
+                className="btn btn-secondary"
+                onClick={e => this.getit(tech.number)}
+                key={i}>
+                {tech.name}
+
+              </button>
+            ))}
+          </div>
           <button
             className="btn btn-primary"
             onClick={this.updateLog}>
@@ -234,7 +168,11 @@ class QA extends Component {
         </div>
 
         <div>
-          {this.state.pointData.length > 0 ? graph : null}
+          {this.state.techReport.prodPoints ? graph : null}
+        </div>
+
+        <div>
+          {this.state.techReport.prodPoints ? table : null}
         </div>
       </div>
     );
