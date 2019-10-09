@@ -8,12 +8,12 @@ import '../react_dates_overrides.css';
 import { DateRangePicker } from 'react-dates';
 
 
-//add date range - done
-//search partial - done
-//search SKU - done
-//number of returned entries - done
-//pages
-//this month, last month, 7 days, 30 days
+//Copy of QA Log
+//Techs for each super
+//Entries per tech / all techs
+//Points per tech
+//enter hours
+//
 
 class QALog extends Component {
   state = {
@@ -39,7 +39,8 @@ class QALog extends Component {
       end: moment(this.state.endDate._d).endOf('day')
     };
   }
-    let data = { query: this.state.searchValue.split(','), type: this.state.searchType, date };
+  console.log(this.state.searchValue)
+    let data = { query: this.state.searchValue, type: this.state.searchType, date };
     axios.post(`${this.url}/qasearch`, data)
       .then(response => {
         this.setState({ foundEntries: response.data, loading: false })
@@ -101,7 +102,6 @@ class QALog extends Component {
           onFocusChange={focusedInput => this.setState({ focusedInput })}
           isOutsideRange={() => false}
           minimumNights={0}
-          showClearDates={true}
         />
         </div>
         <br />

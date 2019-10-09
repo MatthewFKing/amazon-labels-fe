@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import './index.css';
+
+import 'react-dates/initialize';
+import './react_dates_overrides.css';
 import App from './Components/App';
 import registerServiceWorker from './registerServiceWorker';
 

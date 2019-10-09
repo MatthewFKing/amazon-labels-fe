@@ -1,0 +1,20 @@
+.DateInput_input {
+  font-size: 15px !important;
+  padding: 6px 6px 4px !important;
+  cursor: pointer !important;
+}
+
+.DateInput {
+  width: 100px !important;
+}
+
+.DateRangePicker {
+ width: 260px;
+ padding-top: 5px !important;
+ cursor: pointer !important;
+}
+
+.DateRangePickerInput_clearDates {
+  padding: 6px !important;
+  top:5px;
+}

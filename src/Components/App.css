@@ -288,3 +288,17 @@ a[data-toggle="collapse"] {
   font-size: .8rem;
   font-family: 'Verdana', sans-serif;
 }
+
+
+.qalog_filters {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  font-size: 15px;
+}
+
+.qalog_table caption {
+  caption-side: top;
+}
+
+
