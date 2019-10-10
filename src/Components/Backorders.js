@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
-import fileDownload from "js-file-download";
 import "./App.css";
 
 class Backorders extends Component {

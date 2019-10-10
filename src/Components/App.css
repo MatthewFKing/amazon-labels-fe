@@ -301,4 +301,20 @@ a[data-toggle="collapse"] {
   caption-side: top;
 }
 
+.super_report {
+  padding: 20px;
+}
+.select_group {
+  width: 12rem;
+  padding: 0px;
+  
+}
 
+.select_group .btn-group-vertical {
+  vertical-align: top;
+  padding: 0px;
+}
+.super_report{
+  justify-content: flex-start;
+  
+}

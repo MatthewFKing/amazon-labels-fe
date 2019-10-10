@@ -52,7 +52,7 @@ class HomeReport extends Component {
     );
 
     return (
-      <div className="container">
+      <div className="container neeb">
         
         {this.state.update ? updateForm : null}
         <div className="card">

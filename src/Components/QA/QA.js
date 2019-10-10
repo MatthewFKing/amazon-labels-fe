@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from 'moment';
-import "./App.css";
-import '../../node_modules/react-vis/dist/style.css';
+import SuperReport from './SuperReport';
+import "../App.css";
+import '../../../node_modules/react-vis/dist/style.css';
 import {
   HorizontalGridLines,
   VerticalGridLines,
@@ -21,6 +22,7 @@ class QA extends Component {
     techs: [],
     selectedTech: [],
     staticData: [],
+    selectTechs: false,
   };
 
   url = "http://10.0.0.234:3030/qa";
@@ -100,13 +102,17 @@ class QA extends Component {
       
   }
 
+  toggleSelectTechs = () => {
+    this.setState({ selectTechs: !this.state.selectTechs })
+  }
+
 
   render() {
 
 
     let table = null;
 
-    if (this.state.techReport.prodPoints){
+    if (this.state.techReport.prodPoints) {
       
     
     table = (
@@ -144,7 +150,7 @@ class QA extends Component {
 
         <div>
           <div className="btn-group btn-group-sm" role="group" aria-label="Tech Names">
-            <button type="button" className="btn btn-secondary">Total</button>
+            <button onClick={this.toggleSelectTechs} type="button" className="btn btn-secondary">Total</button>
             {this.state.techs.map((tech, i) => (
               <button type="button"
                 className="btn btn-secondary"
@@ -155,7 +161,7 @@ class QA extends Component {
               </button>
             ))}
           </div>
-          <button
+          {/* <button
             className="btn btn-primary"
             onClick={this.updateLog}>
             UpdateLog
@@ -164,7 +170,7 @@ class QA extends Component {
             className="btn btn-primary"
             onClick={this.updateMonth}>
             Update Month
-          </button>
+          </button> */}
         </div>
 
         <div>
@@ -174,6 +180,7 @@ class QA extends Component {
         <div>
           {this.state.techReport.prodPoints ? table : null}
         </div>
+        {this.state.selectTechs ? <SuperReport techs={this.state.techs}/> : null}
       </div>
     );
   }

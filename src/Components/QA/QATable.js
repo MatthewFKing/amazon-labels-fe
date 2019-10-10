@@ -29,8 +29,8 @@ const QATable = props => {
           {props.foundEntries.map((entry, i) => (
             <tr key={i}>
               <th scope="row">{moment(entry.date).format('L')}</th>
-              <td>{entry.order_id}</td>
-              <td>{entry.invoice_number}</td>
+              <td onClick={() => props.searchEntry(entry.order_id, 'order_id')}>{entry.order_id}</td>
+              <td onClick={() => props.searchEntry(entry.invoice_number, 'invoice_number')}>{entry.invoice_number}</td>
               <td>{entry.serial}</td>
               <td>{entry.model}</td>
               <td className="sku_column">{entry.sku}</td>
