@@ -3,11 +3,6 @@
   background-color:#F7F7F7;
 }
 
-body {
-  background-color:#F7F7F7;
-  font-family: 'Poppins', sans-serif;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -304,17 +299,21 @@ a[data-toggle="collapse"] {
 .super_report {
   padding: 20px;
 }
+
 .select_group {
   width: 12rem;
   padding: 0px;
-  
+  justify-content: flex-start;
+  background-color:#F7F7F7;
+  border: none;
 }
 
 .select_group .btn-group-vertical {
   vertical-align: top;
   padding: 0px;
+  border: none;
 }
-.super_report{
-  justify-content: flex-start;
-  
+
+.select_group .card-header {
+  border: 1px solid rgba(0,0,0,.125)
 }
