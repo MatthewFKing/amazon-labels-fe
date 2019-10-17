@@ -5,9 +5,9 @@ const QATable = props => {
 
   let tableStyle = {};
   props.isLoading ? tableStyle.filter = 'blur(2px)' : tableStyle = {}
-  
+
   return (
-    <div  className="qalog_table container">
+    <div className="qalog_table container">
       <table style={tableStyle} className="table table-hover table-striped table-bordered table-sm">
         <caption>Entries: {props.foundEntries.length}</caption>
         <thead className="thead-dark">
@@ -27,8 +27,11 @@ const QATable = props => {
         <tbody>
 
           {props.foundEntries.map((entry, i) => (
-            <tr key={i}>
-              <th scope="row">{moment(entry.date).format('L')}</th>
+            <tr key={i} id={`accordion${i}`}>
+              
+              <th scope="row">
+                {moment(entry.date).format('L')}
+              </th>
               <td onClick={() => props.searchEntry(entry.order_id, 'order_id')}>{entry.order_id}</td>
               <td onClick={() => props.searchEntry(entry.invoice_number, 'invoice_number')}>{entry.invoice_number}</td>
               <td>{entry.serial}</td>
@@ -38,8 +41,11 @@ const QATable = props => {
               <td>{entry.tech_number}</td>
               <td>{entry.tracking_number}</td>
               <td>{entry.notes}</td>
+              
             </tr>
+
           ))}
+          
         </tbody>
       </table>
     </div>

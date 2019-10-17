@@ -13,7 +13,10 @@ import Nav from './Nav.js';
 import Sidebar from './Sidebar';
 import FNSKULabels from './FBA/FNSKULabels';
 import Test from './Test.js';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Router, Route } from 'react-router-dom';
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
 
 class App extends Component {
 
@@ -21,7 +24,7 @@ class App extends Component {
   render() {
     
     return (
-      <Router>
+      <Router history={history}>
         <div className="main">
         <Route path="/" component={Nav}/>
         <Route path='/' component={Sidebar}/>
@@ -36,7 +39,7 @@ class App extends Component {
         <Route path="/fnsku" component={FNSKULabels}/>
         <Route path="/web" component={WebOrders}/>
         <Route path="/qa" component={QA}/>
-        <Route path="/qalog" component={QALog}/>
+        <Route exact path="/qalog/:id" component={QALog}/>
         
         </div>
       </Router>

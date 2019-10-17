@@ -32,7 +32,7 @@ class Sidebar extends Component {
                 <NavLink className="nav-link" to="/qa">Production Reports</NavLink>
               </li>
               <li>
-                <NavLink className="nav-link" to="/qalog">QA Log</NavLink>
+                <NavLink className="nav-link" to="/qalog/:123">QA Log</NavLink>
               </li>
             </ul>
           </li>

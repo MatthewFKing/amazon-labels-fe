@@ -8,6 +8,7 @@ import './react_dates_overrides.css';
 import { DateRangePicker } from 'react-dates';
 
 
+
 //add date range - done
 //search partial - done
 //search SKU - done
@@ -23,34 +24,24 @@ class QALog extends Component {
     endDate: null,
     startDate: null,
     loading: false,
+    id: "qa"
 
 
   }
 
+  
+
   url = "http://10.0.0.234:3030/qa";
+
 
   getit = (e) => {
     e.preventDefault();
     this.setState({ loading: true });
     this.postSearch();
-    //   let date = null;
-    //   if (this.state.startDate) {
-    //   date = {
-    //     start: moment(this.state.startDate._d).startOf('day'),
-    //     end: moment(this.state.endDate._d).endOf('day')
-    //   };
-    // }
-    //   let data = { query: this.state.searchValue.split(','), type: this.state.searchType, date };
-    //   axios.post(`${this.url}/qasearch`, data)
-    //     .then(response => {
-    //       this.setState({ foundEntries: response.data, loading: false })
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
   }
 
   postSearch = () => {
+    this.props.history.push(`/qalog/:${this.state.searchValue}`, this.state)
     let date = null;
     if (this.state.startDate) {
       date = {
@@ -96,6 +87,7 @@ class QALog extends Component {
 
 
   render() {
+
 
     const { foundEntries } = this.state;
 
