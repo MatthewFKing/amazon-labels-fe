@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from 'moment';
-import SuperReport from './SuperReport';
+//import SuperReport from './SuperReport';
+import EditTechs from './EditTechs';
 import "../App.css";
 import '../../../node_modules/react-vis/dist/style.css';
 import {
@@ -23,6 +24,7 @@ class QA extends Component {
     selectedTech: [],
     staticData: [],
     selectTechs: false,
+    isEditingTechs: false,
   };
 
   url = "http://10.0.0.234:3030/qa";
@@ -82,8 +84,7 @@ class QA extends Component {
     axios.post(`${this.url}/qalog`, { number })
       .then(response => {
         //console.log(response.data);
-        this.setState({ pointData: response.data.pointData });
-        this.setState({ dates: response.data.dates });
+        this.setState({ pointData: response.data.pointData, dates: response.data.dates });
       })
       .catch(error => {
         console.log(error)
@@ -102,8 +103,8 @@ class QA extends Component {
       
   }
 
-  toggleSelectTechs = () => {
-    this.setState({ selectTechs: !this.state.selectTechs })
+  editTechs = () => {
+    this.setState({ isEditingTechs: !this.state.isEditingTechs })
   }
 
 
@@ -150,8 +151,8 @@ class QA extends Component {
 
         <div>
           <div className="btn-group btn-group-sm" role="group" aria-label="Tech Names">
-            <button onClick={this.toggleSelectTechs} type="button" className="btn btn-secondary">Total</button>
-            {this.state.techs.map((tech, i) => (
+            <button onClick={this.editTechs} type="button" className="btn btn-secondary">Edit Techs</button>
+            {/* {this.state.techs.map((tech, i) => (
               <button type="button"
                 className="btn btn-secondary"
                 onClick={e => this.getit(tech.number)}
@@ -159,7 +160,7 @@ class QA extends Component {
                 {tech.name}
 
               </button>
-            ))}
+            ))} */}
           </div>
           {/* <button
             className="btn btn-primary"
@@ -180,7 +181,7 @@ class QA extends Component {
         <div>
           {this.state.techReport.prodPoints ? table : null}
         </div>
-        {this.state.selectTechs ? <SuperReport techs={this.state.techs}/> : null}
+        {this.state.isEditingTechs ? <EditTechs techs={this.state.techs}/> : null}
       </div>
     );
   }
