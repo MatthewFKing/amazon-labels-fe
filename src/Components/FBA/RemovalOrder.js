@@ -79,20 +79,21 @@ class RemovalOrder extends Component {
     }
   };
 
-  onUploadParts = e => {
+  onUploadParts = async (e) => {
     e.preventDefault();
-    const url = `${this.url}/ro/partlist`;
-    let data = new FormData();
-    data.append("file", this.partsList.files[0]);
-
-    axios
-      .post(url, data)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
+    if (this.partsList.files[0]) {
+    let reader = new FileReader();
+    reader.onload = () => {
+      let data = reader.result.split(/\n(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(line => {
+        return line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(text => {
+          return text;  
+        });
       });
+      console.log(data);
+      
+    }
+    reader.readAsText(this.partsList.files[0]);
+  }
   };
 
   addPO = (po, e) => {
@@ -203,17 +204,19 @@ class RemovalOrder extends Component {
 
 
           <h3 className="card-header">Update Parts List</h3>
-          <form className="form-inline" onSubmit={this.onUploadParts}>
+          <form className="form-inline" >
             <div className="form-group">
               <input
                 className="form-control-file"
+                id="inputGroupFile01"
                 ref={ref => {
                   this.partsList = ref;
                 }}
                 type="file"
+                onChange={this.onUploadParts}
               />
             </div>
-            <button className="btn btn-primary">Upload</button>
+            <button onClick={this.onUploadParts} className="btn btn-primary">Upload</button>
           </form>
           <form className="form-inline">
             <div className="form-row align-items-center card-body">

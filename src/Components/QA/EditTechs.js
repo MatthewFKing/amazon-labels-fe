@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
+//import axios from "axios";
 //import moment from 'moment';
 import "../App.css";
 import 'react-dates/lib/css/_datepicker.css';
@@ -25,7 +25,7 @@ const EditTechs = props => {
   </button>
         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           {props.techs.map((tech, i) => (
-            <a className="dropdown-item" href="#" key={i}>{tech.name}</a>
+            <a className="dropdown-item" key={i}>{tech.name}</a>
           ))}
         </div>
       </div>
