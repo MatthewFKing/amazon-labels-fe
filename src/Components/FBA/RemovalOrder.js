@@ -11,7 +11,8 @@ class RemovalOrder extends Component {
     missingParts: [],
     error: "",
     ufNum: 0,
-    editUF: false
+    editUF: false, 
+    parts: [],
   };
 
   url = "http://10.0.0.234:3030";
@@ -84,13 +85,15 @@ class RemovalOrder extends Component {
     if (this.partsList.files[0]) {
     let reader = new FileReader();
     reader.onload = () => {
-      let data = reader.result.split(/\n(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(line => {
-        return line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(text => {
-          return text;  
-        });
-      });
+      let data = reader.result;
       console.log(data);
-      
+      axios.post(`${this.url}/ro/partlist`, {data})
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
     reader.readAsText(this.partsList.files[0]);
   }
