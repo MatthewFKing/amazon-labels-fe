@@ -76,7 +76,7 @@ class QALog extends Component {
       })
       .catch(error => {
         console.log(error);
-      })
+      });
   }
 
   searchEntry = async (value, type) => {

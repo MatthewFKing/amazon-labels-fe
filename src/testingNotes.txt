@@ -1,34 +1,8 @@
-To Do:
-
-Removal Order Generator: 
-prompt for next closest SKU when part isnt found.
-
-
-
-Neeb:
-tax info for Ebay is not working
-
-
-PDF:
-move finished file to tmp
-create unique file names for tmp files
-
-
-Home Page:
-
-throughout:
-Redux Forms
-Switch for the routers
-
-Done:
-
-Removal Order Generator:
-update -UF numbers (2918)
-Remove CF stuff from RO part import
-date on removal orders not importing (try removing toLocalDateString) - using moment.js
-remove -S
-update parts list
-remove first element from returned po list and add a static header for that list.
-
-Neeb:
-dates not working either. - working using moment.js
+merge backend and frontend together
+error handling
+re-do the browser router
+redux
+fix css files
+segment everything into smaller parts
+login component
+sass
