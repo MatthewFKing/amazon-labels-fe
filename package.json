@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.1",
-    "chart.js": "^2.9.1",
+    "chart.js": "^2.9.4",
     "excel-parser": "^0.2.2",
     "js-file-download": "^0.4.8",
     "moment": "^2.24.0",
